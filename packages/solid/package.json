@@ -41,9 +41,11 @@
     "tailwind-merge": "^1.12.0",
     "tailwindcss": "^3.3.2",
     "uuid": "^9.0.0",
-    "solid-js": "^1.7.11"
+    "solid-js": "^1.7.11",
+    "@creation-ui/core": "latest"
   },
   "peerDependencies": {
+    "@creation-ui/core": "latest",
     "solid-js": "^1.0",
     "tailwindcss": "^3.0"
   },

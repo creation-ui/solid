@@ -10,10 +10,11 @@ interface InteractiveContainerProps extends JSX.HTMLAttributes<HTMLDivElement> {
 export const InteractiveContainer: ParentComponent<
   InteractiveContainerProps
 > = props => {
-  const [{ children, disabled, class: className }, ...rest] = splitProps(
-    props,
-    ['disabled', 'children', 'class']
-  )
+  const [{ children, disabled, class: className }, rest] = splitProps(props, [
+    'disabled',
+    'children',
+    'class',
+  ])
 
   const classes = clsx(className)?.split(' ')
   const widthClasses = getWidthClasses(classes)

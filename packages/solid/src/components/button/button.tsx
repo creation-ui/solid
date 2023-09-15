@@ -13,7 +13,7 @@ const Button: ParentComponent<ButtonProps> = props => {
   const [
     //
     ui,
-    ...rest
+    rest
   ] = splitProps(props, [
     'children',
     'loading',
