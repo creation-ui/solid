@@ -1,9 +1,33 @@
 {
-  "name": "creation-ui-solid",
+  "name": "@creation-ui/solid",
+  "version": "0.1.0-alpha",
+  "description": "Solid.js UI library.",
+  "author": {
+    "name": "Paweł Krystkiewicz",
+    "email": "pawelkrystkiewicz@outlook.com"
+  },
+  "license": "MIT",
   "scripts": {
-    "dev": "solid-start dev",
+    "start": "solid-start dev --open",
     "build": "solid-start build",
-    "start": "solid-start start"
+    "lint": "lint",
+    "nuke": "rm -rf node_modules yarn.lock pnpm-lock.yaml && pnpm install",
+    "sitemap": "",
+    "package:version": "pnpm --filter ./packages/solid ci:version",
+    "package:build": "pnpm rm:build && pnpm --filter ./packages/solid build",
+    "package:publish": "pnpm --filter ./packages/solid _publish",
+    "package": "pnpm package:version && pnpm package:build && pnpm package:publish",
+    "export": "next export",
+    "ci:publish": "pnpm publish -r",
+    "ci:version": "git fetch --tags && npm version $(git describe --abbrev=0 --tags)",
+    "amend": "git commit --amend --no-edit",
+    "import-check": "npx cycle-import-check",
+    "rm:build": "rm -rf ./packages/solid/build",
+    "e2e": "pnpm package:build && cypress run",
+    "e2e:dev": "pnpm package:build && cypress open",
+    "override-version": "sh ./override-version.sh",
+    "generate:docs": "node ./scripts/generate-docs.js",
+    "prettify": "prettier --write ."
   },
   "type": "module",
   "devDependencies": {
@@ -17,8 +41,11 @@
   "dependencies": {
     "@solidjs/meta": "^0.28.6",
     "@solidjs/router": "^0.8.3",
+    "@types/node": "^20.6.1",
     "solid-js": "^1.7.11",
-    "solid-start": "^0.3.5"
+    "solid-start": "^0.3.5",
+    "vite-plugin-svgr": "^3.2.0",
+    "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {
     "node": "18"
