@@ -41,7 +41,7 @@ export const PopoverTrigger = forwardRef<HTMLElement, PopoverTriggerProps>(
         ref={ref}
         data-state={ctx.open ? 'open' : 'closed'}
         {...ctx.getReferenceProps(props)}
-        className={clsx(popoverTriggerClasses({ className, size: finalSize }))}
+        class={clsx(popoverTriggerClasses({ className, size: finalSize }))}
       >
         {children}
       </div>

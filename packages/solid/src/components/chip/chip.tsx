@@ -23,7 +23,7 @@ export const Chip = (props: ChipProps) => {
 
   return (
     <div
-      className={chipClasses({
+      class={chipClasses({
         size,
         status,
         variant,
@@ -32,11 +32,11 @@ export const Chip = (props: ChipProps) => {
       })}
       onClick={onClick}
     >
-      <div className='min-w-[8px]'>{startAdornment}</div>
+      <div class='min-w-[8px]'>{startAdornment}</div>
       <span>{label ?? status}</span>
-      <div className='min-w-[8px]'>
+      <div class='min-w-[8px]'>
         {onDelete && (
-          <div className='bg-info-50 dark:bg-info-500/50 p-[1px] m-[2px] rounded-full'>
+          <div class='bg-info-50 dark:bg-info-500/50 p-[1px] m-[2px] rounded-full'>
             <ClearButton onClick={onDelete} />
           </div>
         )}

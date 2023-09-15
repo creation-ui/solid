@@ -7,10 +7,10 @@ export const Loader = (props: LoaderProps) => {
   const { size = defaultSize, className, white, active } = props
 
   return (
-    <div className={loaderClasses({ size, className, active })}>
+    <div class={loaderClasses({ size, className, active })}>
       <svg
         aria-hidden='true'
-        className={loaderIconClasses({ size, white })}
+        class={loaderIconClasses({ size, white })}
         viewBox='0 0 100 101'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'

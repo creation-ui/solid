@@ -51,8 +51,8 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
     typeof separator === 'string' ? separators[separator] : separator
 
   return (
-    <nav className='flex' {...props}>
-      <ol className={listClasses({ spacing })}>
+    <nav class='flex' {...props}>
+      <ol class={listClasses({ spacing })}>
         {normalizedLinks?.map((link, idx, array) => (
           <BreadcrumbItem
             count={array?.length}
@@ -60,7 +60,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
             link={link}
             separator={
               idx === 0 ? (
-                <div className='mr-1'>{homeIcon}</div>
+                <div class='mr-1'>{homeIcon}</div>
               ) : (
                 separatingIcon
               )

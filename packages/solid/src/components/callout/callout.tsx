@@ -78,15 +78,15 @@ export const Callout = (props: CalloutProps) => {
 
   return (
     <div
-      className={calloutClasses({ status, variant, className })}
+      class={calloutClasses({ status, variant, className })}
       role='alert'
     >
       {icon}
-      <div className={clsx('flex', 'flex-col', 'w-full')}>
+      <div class={clsx('flex', 'flex-col', 'w-full')}>
         {title && (
-          <h4 className='mb-2 text-2xl font-medium leading-tight '>{title}</h4>
+          <h4 class='mb-2 text-2xl font-medium leading-tight '>{title}</h4>
         )}
-        <p className=''>{content}</p>
+        <p class=''>{content}</p>
       </div>
       {onClose && <ClearButton onClick={onClose} />}
     </div>

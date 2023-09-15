@@ -9,12 +9,12 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
   const badgeType = badge?.count ? 'count' : 'dot'
 
   return (
-    <div ref={ref} className={clsx(avatar.container)}>
-      <img {...props} className={avatar.img({ size, variant })} />
+    <div ref={ref} class={clsx(avatar.container)}>
+      <img {...props} class={avatar.img({ size, variant })} />
       {props.badge && (
         <>
           <div
-            className={avatar.notifications({
+            class={avatar.notifications({
               horizontal: badge?.placement?.horizontal,
               vertical: badge?.placement?.vertical,
               type: badgeType,
@@ -24,7 +24,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
           >
             <span>{props.badge?.count}</span>
             <span
-              className={avatar.pulse({
+              class={avatar.pulse({
                 pulse: badge?.pulse,
                 color: badge?.color,
                 size,

@@ -36,11 +36,11 @@ export interface SelectProps<T = SelectOptionDefault>
   /**
    * Error to display for this input
    */
-  error?: React.ReactNode
+  error?: JSX.Element
   /**
    * Helper text to display below the input
    */
-  helperText?: React.ReactNode
+  helperText?: JSX.Element
   /**
    * Label to display above the input
    */
@@ -142,16 +142,16 @@ export interface SelectProps<T = SelectOptionDefault>
    * Component to display list options
    * @param {RenderOptionProps} props - The properties of the option.
    * @param {T} option - The option to render.
-   * @returns {React.ReactNode} - The rendered option component.
+   * @returns {JSX.Element} - The rendered option component.
    */
-  renderOption?: (props: RenderOptionProps, option: T) => React.ReactNode
+  renderOption?: (props: RenderOptionProps, option: T) => JSX.Element
 
   /**
    * Component to display selection
    * @param {T} option - The selected option to render.
-   * @returns {React.ReactNode} - The rendered selection component.
+   * @returns {JSX.Element} - The rendered selection component.
    */
-  renderSelection?: (option: T) => React.ReactNode
+  renderSelection?: (option: T) => JSX.Element
 }
 
 export interface SelectViewProps extends Omit<SelectProps, 'size'> {}

@@ -53,7 +53,7 @@ export const TimePicker: FC<TimePickerProps> = props => {
           onClear={onClear}
         />
       </PopoverTrigger>
-      <PopoverContent className='!p-0 !bg-transparent'>
+      <PopoverContent class='!p-0 !bg-transparent'>
         {open && (
           <TimeSelector
             value={value}

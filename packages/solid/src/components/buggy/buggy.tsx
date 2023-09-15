@@ -10,7 +10,7 @@ export const Buggy = ({ value, className }: BuggyProps) => (
   <FloatingPortal>
     <>
       <div
-        className={twMerge(
+        class={twMerge(
           [
             'fixed',
             'top-20',
@@ -29,8 +29,8 @@ export const Buggy = ({ value, className }: BuggyProps) => (
           className
         )}
       >
-        <h4 className='leading-relaxed text-xl font-semibold'>Debug</h4>
-        <pre className='text-xs overflow-y-auto'>
+        <h4 class='leading-relaxed text-xl font-semibold'>Debug</h4>
+        <pre class='text-xs overflow-y-auto'>
           {JSON.stringify(value, null, 2)}
         </pre>
       </div>

@@ -26,7 +26,7 @@ export const createTypographyComponent = (variant: ElementTypography) => {
     })
 
     return (
-      <Component {...rest} ref={ref} className={classes({ size })}>
+      <Component {...rest} ref={ref} class={classes({ size })}>
         {children}
       </Component>
     )

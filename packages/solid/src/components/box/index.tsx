@@ -32,7 +32,7 @@ const box = cva([], {
 })
 
 export const Box = ({ children, className, border = true }: BoxProps) => (
-  <div className={box({ body: 'base', className, border })}>
-    <div className={box({ content: 'base' })}>{children}</div>
+  <div class={box({ body: 'base', className, border })}>
+    <div class={box({ content: 'base' })}>{children}</div>
   </div>
 )

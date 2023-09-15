@@ -12,7 +12,7 @@ export const Option = forwardRef<
   ) => {
     return (
       <li
-        className={selectOptionClasses({
+        class={selectOptionClasses({
           active,
           selected,
           multiple,

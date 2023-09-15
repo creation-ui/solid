@@ -70,30 +70,30 @@ const Calendar: FC<CalendarProps> = props => {
         weekStartsOn,
       }}
     >
-      <InteractiveContainer className={className}>
-        <div className={calendarClasses.container({ size })} id={componentId}>
-          <div className='flex items-center justify-between mb-2'>
-            <div className='flex items-center gap-1'>
+      <InteractiveContainer class={className}>
+        <div class={calendarClasses.container({ size })} id={componentId}>
+          <div class='flex items-center justify-between mb-2'>
+            <div class='flex items-center gap-1'>
               <button
-                className={clsx(headerClasses)}
+                class={clsx(headerClasses)}
                 onClick={setView.bind(null, 'months')}
               >
                 {isMonthName &&
                   currentDate.toLocaleDateString(undefined, { month: 'long' })}
               </button>
               <button
-                className={clsx(headerClasses)}
+                class={clsx(headerClasses)}
                 onClick={setView.bind(null, 'years')}
               >
                 {isYearName && currentDate.getFullYear()}
               </button>
             </div>
-            <div className='flex items-center gap-2'>
+            <div class='flex items-center gap-2'>
               <Button
                 circle
                 size='sm'
                 variant='text'
-                className='h-5 w-5 p-3'
+                class='h-5 w-5 p-3'
                 onClick={onPrevClick.bind(null)}
               >
                 <Icon icon='chevron_left' />
@@ -102,7 +102,7 @@ const Calendar: FC<CalendarProps> = props => {
                 circle
                 size='sm'
                 variant='text'
-                className='h-5 w-5 p-3'
+                class='h-5 w-5 p-3'
                 onClick={onNextClick.bind(null)}
               >
                 <Icon icon='chevron_right' />
@@ -118,7 +118,7 @@ const Calendar: FC<CalendarProps> = props => {
             variant='text'
             size='sm'
             onClick={onTodayClick}
-            className='absolute bottom-2 left-2'
+            class='absolute bottom-2 left-2'
           >
             Today
           </Button>

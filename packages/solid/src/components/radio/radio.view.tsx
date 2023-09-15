@@ -9,10 +9,10 @@ export const RadioView = forwardRef<HTMLInputElement, RadioProps>(
 
     return (
       <>
-        <div className={classes.container}>
+        <div class={classes.container}>
           <input
             ref={ref}
-            className={radio({ size, className })}
+            class={radio({ size, className })}
             type='radio'
             name={componentId}
             id={componentId}

@@ -69,18 +69,18 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
 
   return (
     <div
-      className={clsx(
+      class={clsx(
         'bg-white dark:bg-info-800 dark:border-info-700 border rounded-md',
         'grid grid-cols-2 gap-2'
       )}
     >
-      <div className={columnClasses}>
+      <div class={columnClasses}>
         {hours.map(hour => (
           <div
             ref={el => ((hourRef as any).current[hour] = el)}
             key={hour}
             onClick={() => handleSelect({ hour })}
-            className={cellClasses({
+            class={cellClasses({
               selected: currentDate?.getHours() === hour,
             })}
           >
@@ -88,13 +88,13 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
           </div>
         ))}
       </div>
-      <div className={columnClasses}>
+      <div class={columnClasses}>
         {minutes.map(minute => (
           <div
             ref={el => ((minuteRef as any).current[minute] = el)}
             key={minute}
             onClick={() => handleSelect({ minute })}
-            className={cellClasses({
+            class={cellClasses({
               selected: currentDate?.getMinutes() === minute,
             })}
           >

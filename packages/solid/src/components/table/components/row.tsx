@@ -12,7 +12,7 @@ const Row = ({ row }: RowCellProps) => {
 
   return (
     <tr
-      className={clsx(
+      class={clsx(
         'hover:bg-gray-100 dark:hover:bg-gray-800 w-full',
         rowGridClasses
       )}

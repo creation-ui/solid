@@ -39,7 +39,7 @@ const Icon = ({ icon, className, ...props }: IconProps) => {
   const Component = map[icon]
   const c = twMerge(classes, className)
 
-  return <Component className={c} {...props} />
+  return <Component class={c} {...props} />
 }
 
 export default Icon

@@ -14,7 +14,7 @@ export const Overlay = ({
 
   return (
     <div
-      className={twMerge(
+      class={twMerge(
         overlay({
           visible: active,
           cursorWait,

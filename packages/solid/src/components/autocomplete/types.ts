@@ -25,15 +25,15 @@ export interface AutocompleteProps<T = AutocompleteOptionDefault>
   /**
    * Component to display list options
    */
-  renderOption?: (props: AutocompleteOptionProps, option: T) => React.ReactNode
+  renderOption?: (props: AutocompleteOptionProps, option: T) => JSX.Element
   /**
    * Component to display list options
    */
-  renderSelection?: (option: T) => React.ReactNode
+  renderSelection?: (option: T) => JSX.Element
   /**
    * Component to display selection in `multiple` mode
    */
-  renderTags?: (selected: T[]) => React.ReactNode
+  renderTags?: (selected: T[]) => JSX.Element
   /**
    * Text to display when the tags are truncated (limitTags).
     Signature:

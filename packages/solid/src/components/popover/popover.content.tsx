@@ -35,7 +35,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
           <div
             ref={ref}
             style={style}
-            className={popoverContentClasses({ size: finalSize, className })}
+            class={popoverContentClasses({ size: finalSize, className })}
             aria-labelledby={ctx.labelId}
             aria-describedby={ctx.descriptionId}
             {...ctx.getFloatingProps(props)}

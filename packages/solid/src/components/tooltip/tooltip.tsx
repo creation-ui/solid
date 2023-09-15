@@ -6,8 +6,8 @@ const Tooltip = (props: TooltipProps) => {
   const { className, position = 'top', children, content, ...rest } = props
 
   return (
-    <div className={clsx(['relative', 'max-w-fit', 'group'])}>
-      <div {...props} className={tooltip({ className, position })}>
+    <div class={clsx(['relative', 'max-w-fit', 'group'])}>
+      <div {...props} class={tooltip({ className, position })}>
         {content}
       </div>
       {children}

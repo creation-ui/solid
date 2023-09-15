@@ -1,7 +1,11 @@
-import type React from 'react'
-import type { ElementSize, ElementStatus, ElementVariant } from '@creation-ui/core'
+import type {
+  ElementSize,
+  ElementStatus,
+  ElementVariant,
+} from '@creation-ui/core'
+import { JSX } from 'solid-js'
 
-export type ButtonProps = React.ComponentProps<'button'> & {
+export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   /**
    * Is button loading?
    */
@@ -21,11 +25,11 @@ export type ButtonProps = React.ComponentProps<'button'> & {
   /**
    * Icon to be displayed on the left side of the button
    */
-  iconLeft?: React.ReactNode
+  iconLeft?: JSX.Element
   /**
    * Icon to be displayed on the right side of the button
    */
-  iconRight?: React.ReactNode
+  iconRight?: JSX.Element
   /**
    * Status of the button
    */
@@ -34,6 +38,10 @@ export type ButtonProps = React.ComponentProps<'button'> & {
    * Is button text to be uppercase
    */
   uppercase?: boolean
+  /**
+   * Is button disabled?
+   */
+  disabled?: boolean
 }
 
 export type ButtonGroupProps = {

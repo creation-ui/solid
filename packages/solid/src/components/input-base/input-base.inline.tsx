@@ -66,12 +66,12 @@ const InputBaseInline: FC<InputBaseProps> = props => {
           type,
         }}
       >
-        <div className={cx?.container?.outer}>
-          <div className={outerContainerClasses}>
+        <div class={cx?.container?.outer}>
+          <div class={outerContainerClasses}>
             {children}
             <label
               htmlFor={componentId}
-              className={label({
+              class={label({
                 size,
                 required: props.required,
                 className: cx?.label,
@@ -84,7 +84,7 @@ const InputBaseInline: FC<InputBaseProps> = props => {
           <Description
             size={size}
             error={!!error}
-            className={error ? errorClasses.text : ''}
+            class={error ? errorClasses.text : ''}
           >
             {error || helperText}
           </Description>

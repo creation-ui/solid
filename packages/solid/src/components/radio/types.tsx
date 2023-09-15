@@ -32,7 +32,7 @@ export type RadioGroupProps = Omit<
   /**
    * Helper text
    */
-  helperText?: React.ReactNode
+  helperText?: JSX.Element
 }
 
 export type RadioProps = Omit<React.ComponentProps<'input'>, 'size'> & {

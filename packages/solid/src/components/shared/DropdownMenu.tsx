@@ -38,7 +38,7 @@ export const DropdownMenu = forwardRef<HTMLUListElement, DropdownMenuProps>(
       <ul
         ref={ref}
         {...props}
-        className={dropdownMenuClasses({ open, className, placement })}
+        class={dropdownMenuClasses({ open, className, placement })}
       >
         {children}
       </ul>

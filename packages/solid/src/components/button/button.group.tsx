@@ -4,11 +4,11 @@ import { toggleGroup } from '../toggle-group/classes'
 import type { ButtonGroupProps } from './button.types'
 
 const ButtonGroup = ({ options, size = 'md', className }: ButtonGroupProps) => (
-  <div className={twMerge(toggleGroup.container, className)}>
+  <div class={twMerge(toggleGroup.container, className)}>
     {options.map((button, index) => (
       <button
         key={index}
-        className={twMerge(
+        class={twMerge(
           toggleGroup.button({
             size,
             disabled: button.disabled,

@@ -17,7 +17,7 @@ export const ToggleGroupView = ({
     <RadioGroup
       {...rest}
       id={componentId}
-      className={twMerge(toggleGroup.container, className)}
+      class={twMerge(toggleGroup.container, className)}
       disabled={disabled || readOnly}
     >
       {options.map(
@@ -27,7 +27,7 @@ export const ToggleGroupView = ({
             value={value}
             title={value}
             disabled={disabled}
-            className={({ checked, disabled }) =>
+            class={({ checked, disabled }) =>
               toggleGroup.button({
                 checked,
                 // @ts-ignore

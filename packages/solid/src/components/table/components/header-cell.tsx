@@ -55,24 +55,24 @@ export default function HeaderCell({ header }: HeaderCellProps) {
       colSpan={header.colSpan}
       scope='col'
       onClick={header.column.getToggleSortingHandler()}
-      className={cellClasses({ align, className, padding: false })}
+      class={cellClasses({ align, className, padding: false })}
       {...meta}
     >
       {header.isPlaceholder ? null : (
         <div
           style={{ width }}
-          className={headerCellClass({
+          class={headerCellClass({
             sortable,
             align,
           })}
         >
-          <span className={clsx('flex', 'items-center')}>
+          <span class={clsx('flex', 'items-center')}>
             {flexRender(header.column.columnDef.header, header.getContext())}
             {isSorted && (
               <Icon
                 aria-hidden='true'
                 icon='straight'
-                className={sortIconClasses({
+                class={sortIconClasses({
                   desc: isSorted === 'desc',
                 })}
               />

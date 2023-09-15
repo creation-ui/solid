@@ -48,20 +48,20 @@ export const Version = ({ classNameOverride, gitHash }: VersionProps) => {
   return (
     <div
       style={{ fontSize: 8 }}
-      className={
+      class={
         classNameOverride ? classNameOverride : 'absolute bottom-0 right-0 px-2'
       }
     >
       <span
         title={'Version'}
-        className={clsx([classNames, 'hover:bg-sky-100', 'hover:ring-sky-200'])}
+        class={clsx([classNames, 'hover:bg-sky-100', 'hover:ring-sky-200'])}
       >
         v{version}
       </span>
       -
       <span
         title={`Last commit hash: ${hash}`}
-        className={clsx(
+        class={clsx(
           classNames,
           'hover:bg-orange-100',
           'hover:ring-orange-200'

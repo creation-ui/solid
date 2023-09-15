@@ -15,12 +15,12 @@ export default function FooterCell({ footer }: FooterCellProps) {
     <td
       colSpan={footer.colSpan}
       scope='col'
-      className={twMerge(footerClass, className)}
+      class={twMerge(footerClass, className)}
       style={{ width }}
       {...meta}
     >
       {footer.isPlaceholder ? null : (
-        <div className={'flex items-center'}>
+        <div class={'flex items-center'}>
           {flexRender(footer.column.columnDef.footer, footer.getContext())}
         </div>
       )}

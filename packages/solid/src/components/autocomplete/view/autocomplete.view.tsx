@@ -28,9 +28,9 @@ export const AutocompleteView: FC = () => {
 
   return (
     <>
-      <div className={clsx(classes.input, 'relative h-auto py-1')}>
-        <div className={clsx('flex flex-col gap-1')}>
-          <div className='inline-flex gap-2 items-center flex-wrap h-fit'>
+      <div class={clsx(classes.input, 'relative h-auto py-1')}>
+        <div class={clsx('flex flex-col gap-1')}>
+          <div class='inline-flex gap-2 items-center flex-wrap h-fit'>
             {multiple && <MultipleSelections />}
             {customRenderValue ? (
               <>{renderSelection(selected as AutocompleteOptionDefault)}</>
@@ -38,7 +38,7 @@ export const AutocompleteView: FC = () => {
               <input
                 {...propsInput}
                 id={componentId}
-                className={clsx(
+                class={clsx(
                   'reset-input h-fit',
                   propsInput.className as string
                 )}
@@ -57,7 +57,7 @@ export const AutocompleteView: FC = () => {
                 {hasOptions ? (
                   options?.map(renderOptionInternalContainer)
                 ) : (
-                  <li className={'py-2 px-3 w-full text-center'}>
+                  <li class={'py-2 px-3 w-full text-center'}>
                     {textNotFound}
                   </li>
                 )}

@@ -19,7 +19,7 @@ export const PopoverClose = forwardRef<HTMLButtonElement, PopoverCloseProps>(
         type='button'
         ref={ref}
         {...props}
-        className={popoverCloseClasses({ className, size: finalSize })}
+        class={popoverCloseClasses({ className, size: finalSize })}
         onClick={event => {
           props.onClick?.(event)
           setOpen(false)

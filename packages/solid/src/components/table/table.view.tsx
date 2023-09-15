@@ -22,12 +22,12 @@ const Table = () => {
   const foot = table.getFooterGroups()
 
   return (
-    <div className='overflow-hidden rounded-lg relative'>
+    <div class='overflow-hidden rounded-lg relative'>
       <LoadingOverlay active={loading} />
-      <table className={tableClasses()} style={{ height, maxHeight: height }}>
-        <thead className={headerClasses}>
+      <table class={tableClasses()} style={{ height, maxHeight: height }}>
+        <thead class={headerClasses}>
           {head.map(headerGroup => (
-            <tr key={headerGroup.id} className={headerRowClasses}>
+            <tr key={headerGroup.id} class={headerRowClasses}>
               {headerGroup.headers.map(column => (
                 <HeaderCell header={column} key={column.id} />
               ))}
@@ -36,11 +36,11 @@ const Table = () => {
         </thead>
         {error ? (
           <div
-            className={clsx(sharedTableClasses.border, 'relative', 'w-full')}
+            class={clsx(sharedTableClasses.border, 'relative', 'w-full')}
             style={{ height, maxHeight: height }}
           >
             <div
-              className={clsx(
+              class={clsx(
                 'absolute',
                 'left-1/2',
                 'transform',
@@ -60,7 +60,7 @@ const Table = () => {
           </div>
         ) : (
           <tbody
-            className={bodyClasses()}
+            class={bodyClasses()}
             style={{ height, maxHeight: height }}
           >
             {data.rows.map(row => (
@@ -69,7 +69,7 @@ const Table = () => {
           </tbody>
         )}
 
-        <tfoot className={footerClasses}>
+        <tfoot class={footerClasses}>
           {foot.map(group => (
             <tr key={group.id}>
               {group.headers.map(column => (

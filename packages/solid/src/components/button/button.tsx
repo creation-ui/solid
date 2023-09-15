@@ -1,38 +1,53 @@
-import { createSignal, onCleanup } from 'solid-js';
-import { useId } from '../../hooks';
-import { useTheme } from '../../theme';
-import type { ButtonProps } from './button.types';
-import { button } from './classes';
-import { text } from '@creation-ui/core';
-import { InteractiveContainer } from '../interactive-container';
-import { LoadingOverlay } from '../loading-overlay';
-import { Loader } from '../loader';
-import { twMerge } from 'tailwind-merge';
+import { text } from '@creation-ui/core'
+import { ParentComponent, splitProps } from 'solid-js'
+import { twMerge } from 'tailwind-merge'
+import { useId } from '../../hooks'
+import { useTheme } from '../../theme'
+import { InteractiveContainer } from '../interactive-container'
+import { Loader } from '../loader'
+import { LoadingOverlay } from '../loading-overlay'
+import type { ButtonProps } from './button.types'
+import { button } from './classes'
 
-const Button: (props: ButtonProps, ref: any) => JSX.Element = (props, ref) => {
-  const [componentId] = createSignal(useId(props.id));
-  const theme = useTheme();
+const Button: ParentComponent<ButtonProps> = props => {
+  const [
+    //
+    ui,
+    ...rest
+  ] = splitProps(props, [
+    'children',
+    'loading',
+    'iconLeft',
+    'iconRight',
+    'id',
+    'class',
+    'circle',
+    'size',
+    'variant',
+    'status',
+    'uppercase',
+    'disabled',
+  ])
+  const theme = useTheme()
 
   const {
     children,
     loading,
     iconLeft,
     iconRight,
-    className,
     id,
-    ...otherProps
-  } = props;
-
-  const {
+    class: className,
     circle,
     size = theme.size,
     variant = 'contained',
     status = 'primary',
     uppercase,
-  } = otherProps;
+  } = ui
 
-  const isLoaderWhite = variant === 'contained';
-  const disabled = loading || otherProps.disabled;
+  const componentId = useId(id)
+
+  const isLoaderWhite = variant === 'contained'
+  const disabled = loading || ui.disabled
 
   const classes = twMerge(
     button({
@@ -44,20 +59,14 @@ const Button: (props: ButtonProps, ref: any) => JSX.Element = (props, ref) => {
       uppercase,
       className: [theme.roundness, className, text({ size })],
     })
-  );
+  )
 
-  const centerSpinner: boolean = Boolean(loading && circle);
-  const leftSpinner: boolean = Boolean(loading && !circle);
+  const centerSpinner: boolean = Boolean(loading && circle)
+  const leftSpinner: boolean = Boolean(loading && !circle)
 
   return (
-    <InteractiveContainer disabled={disabled} className={className}>
-      <button
-        id={componentId()}
-        ref={ref}
-        disabled={disabled}
-        {...otherProps}
-        className={classes}
-      >
+    <InteractiveContainer disabled={disabled} class={className}>
+      <button id={componentId} disabled={disabled} {...rest} class={classes}>
         {leftSpinner && (
           <Loader size={'sm'} active={leftSpinner} white={isLoaderWhite} />
         )}
@@ -67,7 +76,7 @@ const Button: (props: ButtonProps, ref: any) => JSX.Element = (props, ref) => {
         {iconRight}
       </button>
     </InteractiveContainer>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

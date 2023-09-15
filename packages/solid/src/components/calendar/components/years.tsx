@@ -20,7 +20,7 @@ export const CalendarYearsView = () => {
       size={size}
       key={year}
       variant={year === currentYear ? 'outlined' : 'text'}
-      className='w-14 h-14 text-info-900 dark:text-info-100'
+      class='w-14 h-14 text-info-900 dark:text-info-100'
       onClick={() => handleYearClick(year)}
     >
       {year}
@@ -30,11 +30,11 @@ export const CalendarYearsView = () => {
   const rows: ReactNode[] = []
   for (let i = 0; i < yearsGrid.length; i += 4) {
     rows.push(
-      <div key={i} className='flex justify-between mb-2'>
+      <div key={i} class='flex justify-between mb-2'>
         {yearsGrid.slice(i, i + 4)}
       </div>
     )
   }
 
-  return <div className='flex flex-col justify-between'>{rows}</div>
+  return <div class='flex flex-col justify-between'>{rows}</div>
 }

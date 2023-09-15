@@ -10,9 +10,9 @@ export const RadioGroupComponentView = ({
     <div
       aria-disabled={disabled}
       aria-readonly={readOnly}
-      className={classes.container}
+      class={classes.container}
     >
-      <div className={'flex flex-col gap-2'}>{children}</div>
+      <div class={'flex flex-col gap-2'}>{children}</div>
     </div>
   )
 }

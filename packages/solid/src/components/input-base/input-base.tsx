@@ -86,10 +86,10 @@ const InputBase = forwardRef<HTMLDivElement, InputBaseProps>((props, ref) => {
           type,
         }}
       >
-        <div className={outerContainerClasses}>
+        <div class={outerContainerClasses}>
           <label
             htmlFor={componentId}
-            className={label({
+            class={label({
               size,
               required: props.required,
               className: cx?.label,
@@ -97,12 +97,12 @@ const InputBase = forwardRef<HTMLDivElement, InputBaseProps>((props, ref) => {
             children={props.label}
             aria-label={props.label?.toString()}
           />
-          <InputBaseContainerInner className={cx?.container?.inner} ref={ref}>
+          <InputBaseContainerInner class={cx?.container?.inner} ref={ref}>
             <Adornment position='left' type={type} adornment={startAdornment} />
             {children}
             {loading ? (
               <Loader
-                className={inputIcon({
+                class={inputIcon({
                   position: 'right',
                   // @ts-expect-error
                   type,
@@ -127,7 +127,7 @@ const InputBase = forwardRef<HTMLDivElement, InputBaseProps>((props, ref) => {
           <Description
             size={size}
             error={hasError}
-            className={clsx(hasError && errorClasses.text)}
+            class={clsx(hasError && errorClasses.text)}
           >
             {error || helperText}
           </Description>

@@ -9,7 +9,7 @@ export type HeadlessRadioGroupProps = GetComponentProps<typeof RadioGroup>
 
 export type ToggleGroupValue = string
 export type ToggleGroupOption = HeadlessRadioGroupOptionProps & {
-  label: string | React.ReactNode
+  label: string | JSX.Element
   value: ToggleGroupValue
   disabled?: boolean
 }

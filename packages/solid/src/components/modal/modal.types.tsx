@@ -6,11 +6,11 @@ export type ModalProps = {
   onOverlayClick?: () => void
   open?: boolean
   className?: string
-  children?: React.ReactNode
+  children?: JSX.Element
 }
 
 export interface ModalTitleProps {
-  children: React.ReactNode
+  children: JSX.Element
   className?: ClassName
   as?: React.ElementType
 }

@@ -33,7 +33,7 @@ const ClearButton = forwardRef<any, ClearButtonProps>(
       ref={ref}
       icon='close'
       onClick={onClick}
-      className={twMerge(classes({ size }), className)}
+      class={twMerge(classes({ size }), className)}
       aria-hidden='true'
       {...props}
     />

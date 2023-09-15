@@ -58,18 +58,18 @@ const Modal = (props: ModalProps) => {
   } = props
   return (
     <>
-      <Overlay className={'fixed'} active={open} onClick={onOverlayClick} />
+      <Overlay class={'fixed'} active={open} onClick={onOverlayClick} />
       <Transition appear show={open} as={Fragment}>
         <Dialog
           as='div'
-          className={clsx(modal.base, zIndex?.modals, className)}
+          class={clsx(modal.base, zIndex?.modals, className)}
           // @ts-ignore
           onClose={onClose}
         >
           <Transition.Child as={Fragment} {...transitionProps.modal}>
-            <div className={clsx(modal.layer[1])}>
-              <div className={clsx(modal.layer[2])}>
-                <Dialog.Panel className={clsx(modal.panel)}>
+            <div class={clsx(modal.layer[1])}>
+              <div class={clsx(modal.layer[2])}>
+                <Dialog.Panel class={clsx(modal.panel)}>
                   {children}
                 </Dialog.Panel>
               </div>
@@ -84,7 +84,7 @@ const Modal = (props: ModalProps) => {
 const Title = (props: ModalTitleProps) => {
   const { children, className, as = 'h3' } = props
   return (
-    <Dialog.Title as={as} className={clsx(modal.title, className)}>
+    <Dialog.Title as={as} class={clsx(modal.title, className)}>
       {children}
     </Dialog.Title>
   )

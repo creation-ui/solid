@@ -25,7 +25,7 @@ export default function Filter({
 
   return typeof firstValue === 'number' ? (
     <div>
-      <div className='flex space-x-2'>
+      <div class='flex space-x-2'>
         <DebouncedInput
           type='number'
           min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
@@ -39,7 +39,7 @@ export default function Filter({
               ? `(${column.getFacetedMinMaxValues()?.[0]})`
               : ''
           }`}
-          className='w-24 border shadow rounded'
+          class='w-24 border shadow rounded'
         />
         <DebouncedInput
           type='number'
@@ -54,10 +54,10 @@ export default function Filter({
               ? `(${column.getFacetedMinMaxValues()?.[1]})`
               : ''
           }`}
-          className='w-24 border shadow rounded'
+          class='w-24 border shadow rounded'
         />
       </div>
-      <div className='h-1' />
+      <div class='h-1' />
     </div>
   ) : (
     <>
@@ -71,10 +71,10 @@ export default function Filter({
         value={(columnFilterValue ?? '') as string}
         onChange={value => column.setFilterValue(value)}
         placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
-        className='w-36 border shadow rounded'
+        class='w-36 border shadow rounded'
         list={column.id + 'list'}
       />
-      <div className='h-1' />
+      <div class='h-1' />
     </>
   )
 }

@@ -3,7 +3,7 @@ import { ClassName, ElementSize, TypographyConfig } from '@creation-ui/core'
 
 export interface TypographyProps extends React.ComponentProps<any> {
   as?: ElementType
-  children?: React.ReactNode
+  children?: JSX.Element
   config?: Partial<TypographyConfig>
   className?: ClassName
   size?: ElementSize

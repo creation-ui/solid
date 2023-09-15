@@ -96,7 +96,7 @@ export const CalendarDaysView = () => {
           size={size}
           variant={variant}
           status={isWeekend ? 'error' : 'primary'}
-          className={dayClassName}
+          class={dayClassName}
           data-date={cellDate}
         >
           {date.getDate().toString()}
@@ -107,7 +107,7 @@ export const CalendarDaysView = () => {
     }
 
     rows.push(
-      <div key={`week-${date.toString()}`} className='flex justify-between'>
+      <div key={`week-${date.toString()}`} class='flex justify-between'>
         {days}
       </div>
     )
@@ -115,11 +115,11 @@ export const CalendarDaysView = () => {
 
   return (
     <>
-      <div className='flex justify-between py-2 text-xs font-semibold capitalize'>
+      <div class='flex justify-between py-2 text-xs font-semibold capitalize'>
         {dayNames.map((dayName, i) => (
           <div
             key={dayName}
-            className={calendarDaysViewClasses.day({
+            class={calendarDaysViewClasses.day({
               isWeekend: [5, 6].includes(i),
             })}
           >

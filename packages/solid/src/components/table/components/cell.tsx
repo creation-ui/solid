@@ -13,7 +13,7 @@ export const Cell = ({ cell }: CellProps) => {
     (cell.column.columnDef.meta as any) ?? {}
   return (
     <td
-      className={cellClasses({ className, align })}
+      class={cellClasses({ className, align })}
       key={cell.id}
       style={{ width }}
       {...meta}

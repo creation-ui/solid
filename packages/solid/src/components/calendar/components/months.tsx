@@ -25,7 +25,7 @@ export const CalendarMonthsView = () => {
       size={size}
       key={monthName}
       variant={currentMonth === index ? 'outlined' : 'text'}
-      className='w-14 h-14 text-info-900 dark:text-info-100'
+      class='w-14 h-14 text-info-900 dark:text-info-100'
       onClick={() => handleMonthClick(index)}
     >
       {monthName}
@@ -35,7 +35,7 @@ export const CalendarMonthsView = () => {
   const rows: ReactNode[] = []
   for (let i = 0; i < months.length; i += 4) {
     rows.push(
-      <div key={i} className='flex justify-between mb-2'>
+      <div key={i} class='flex justify-between mb-2'>
         {months.slice(i, i + 4)}
       </div>
     )

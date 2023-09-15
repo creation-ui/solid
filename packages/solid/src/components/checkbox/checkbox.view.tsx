@@ -42,7 +42,7 @@ export const CheckboxView = ({
       readOnly={readOnly}
       id={componentId}
       type='checkbox'
-      className={checkboxClassNames}
+      class={checkboxClassNames}
     />
   )
 }

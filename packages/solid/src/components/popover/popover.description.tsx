@@ -34,7 +34,7 @@ export const PopoverDescription = forwardRef<
       {...props}
       ref={ref}
       id={id}
-      className={clsx(
+      class={clsx(
         popoverDescriptionClasses({ size: finalSize, className })
       )}
     >

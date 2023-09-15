@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface InputBaseContainerInnerProps {
-  children?: React.ReactNode
+  children?: JSX.Element
   className?: string
 }
 
@@ -12,7 +12,7 @@ export const InputBaseContainerInner = forwardRef<
   HTMLDivElement,
   InputBaseContainerInnerProps
 >(({ children, className }, ref) => (
-  <div className={twMerge(classes, className)} ref={ref}>
+  <div class={twMerge(classes, className)} ref={ref}>
     {children}
   </div>
 ))

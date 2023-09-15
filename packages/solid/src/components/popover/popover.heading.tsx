@@ -30,7 +30,7 @@ export const PopoverHeading = forwardRef<
       {...props}
       ref={ref}
       id={id}
-      className={popoverHeadingClasses({ size: finalSize, className })}
+      class={popoverHeadingClasses({ size: finalSize, className })}
     >
       {children}
     </h2>

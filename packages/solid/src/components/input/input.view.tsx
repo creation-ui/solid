@@ -12,7 +12,7 @@ export const InputView = forwardRef(
       <input
         ref={ref}
         id={componentId}
-        className={classes.input}
+        class={classes.input}
         type={type}
         disabled={disabled}
         aria-invalid={error}

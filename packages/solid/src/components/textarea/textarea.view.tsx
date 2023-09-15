@@ -19,7 +19,7 @@ export const TextAreaView = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       <textarea
         ref={ref}
         id={componentId}
-        className={clsx(classes.input, 'resize')}
+        class={clsx(classes.input, 'resize')}
         disabled={disabled}
         aria-invalid={error}
         aria-readonly={readOnly}

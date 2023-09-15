@@ -94,12 +94,12 @@ const ProgressBar = (props: ProgressBarProps) => {
   const formattedValue = formatDisplayValue(value)
   const width = formatDisplayValueDefault(value)
   return (
-    <div {...props} className={clsx(classes.container, className)}>
+    <div {...props} class={clsx(classes.container, className)}>
       <div
-        className={progressBar({ size, value: value !== 0, status })}
+        class={progressBar({ size, value: value !== 0, status })}
         style={{ width }}
       ></div>
-      <span className={progressValue({ invert, size })}>
+      <span class={progressValue({ invert, size })}>
         {showValue && formattedValue}
       </span>
     </div>

@@ -23,7 +23,7 @@ export const SelectView = () => {
       <div
         id={componentId}
         {...propsContainer}
-        className={twMerge(classes.input, 'cursor-default flex items-center')}
+        class={twMerge(classes.input, 'cursor-default flex items-center')}
       >
         {renderSelection?.(value)}
       </div>
@@ -34,7 +34,7 @@ export const SelectView = () => {
               {options?.length ? (
                 options?.map(renderOptionInternalContainer)
               ) : (
-                <li className={'py-2 px-3 w-full text-center'}>{textEmpty}</li>
+                <li class={'py-2 px-3 w-full text-center'}>{textEmpty}</li>
               )}
             </DropdownMenu>
           </FloatingFocusManager>

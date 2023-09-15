@@ -21,10 +21,10 @@ export const BreadcrumbItem: FC<BreadcrumbItemProps> = memo(
       <>
         {separator}
         <li {...props}>
-          <div className='flex items-center capitalize'>
+          <div class='flex items-center capitalize'>
             <a
               href={href}
-              className='text-gray-700 hover:text-gray-900 text-sm font-medium'
+              class='text-gray-700 hover:text-gray-900 text-sm font-medium'
             >
               {label}
             </a>

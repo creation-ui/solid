@@ -19,7 +19,7 @@ export function Popover({
 
   return (
     <PopoverContext.Provider value={{ ...popover, size }}>
-      <div className={className}>{children}</div>
+      <div class={className}>{children}</div>
     </PopoverContext.Provider>
   )
 }

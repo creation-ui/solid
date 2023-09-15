@@ -16,7 +16,7 @@ const Drawer = ({ open, children, onOverlayClick, ...props }: DrawerProps) => {
 
   return (
     <>
-      <Overlay className={'fixed'} active={open} onClick={onOverlayClick} />
+      <Overlay class={'fixed'} active={open} onClick={onOverlayClick} />
       <Transition
         show={open}
         as={Fragment}
@@ -32,10 +32,10 @@ const Drawer = ({ open, children, onOverlayClick, ...props }: DrawerProps) => {
           unmount={false}
           // @ts-ignore
           onClose={onClose}
-          className={drawer({ className: [zIndex?.modals], position })}
+          class={drawer({ className: [zIndex?.modals], position })}
         >
-          <div className='h-full flex'>
-            <div className={clsx(child)}>{children}</div>
+          <div class='h-full flex'>
+            <div class={clsx(child)}>{children}</div>
           </div>
         </Dialog>
       </Transition>

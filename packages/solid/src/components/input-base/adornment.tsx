@@ -3,7 +3,7 @@ import { HTMLInputType } from '@creation-ui/core'
 import { inputIcon } from '@creation-ui/core'
 
 interface AdornmentProps {
-  adornment?: React.ReactNode
+  adornment?: JSX.Element
   position?: 'left' | 'right'
   type?: HTMLInputType
 }
@@ -12,7 +12,7 @@ export const Adornment: FC<AdornmentProps> = ({ position, type, adornment }) =>
   adornment ? (
     <div
       // @ts-expect-error
-      className={inputIcon({ position, type })}
+      class={inputIcon({ position, type })}
     >
       {adornment}
     </div>

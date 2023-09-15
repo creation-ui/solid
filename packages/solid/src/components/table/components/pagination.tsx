@@ -17,7 +17,7 @@ const PaginationBlock = ({
   disabled,
   ...props
 }: PaginationBlockProps) => (
-  <button className={paginationClasses({ current, disabled })} {...props}>
+  <button class={paginationClasses({ current, disabled })} {...props}>
     {value}
   </button>
 )
@@ -28,7 +28,7 @@ const PageSelectorButtons = () => {
   const texts = pagination?.texts
 
   return (
-    <div className='flex gap-2'>
+    <div class='flex gap-2'>
       <Button
         variant='outlined'
         onClick={() => table.previousPage()}
@@ -68,9 +68,9 @@ const PageSelector = () => {
     <>
       <Button
         iconLeft={
-          <Icon icon='chevron_left' className='h-5 w-5' aria-hidden='true' />
+          <Icon icon='chevron_left' class='h-5 w-5' aria-hidden='true' />
         }
-        className='relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+        class='relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
         onClick={() => table.previousPage()}
         disabled={!table.getCanPreviousPage()}
       ></Button>
@@ -109,9 +109,9 @@ const PageSelector = () => {
       <Button
         onClick={() => table.nextPage()}
         disabled={!table.getCanNextPage()}
-        className='relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+        class='relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
       >
-        <Icon icon='chevron_right' className='h-5 w-5' aria-hidden='true' />
+        <Icon icon='chevron_right' class='h-5 w-5' aria-hidden='true' />
       </Button>
     </>
   )
@@ -136,30 +136,30 @@ const Pagination = () => {
   const currentSize = table.getState().pagination.pageSize
   return (
     <>
-      <div className='px-4 py-3 flex items-center justify-between sm:px-6'>
-        <div className='flex-1 flex justify-between sm:hidden'>
+      <div class='px-4 py-3 flex items-center justify-between sm:px-6'>
+        <div class='flex-1 flex justify-between sm:hidden'>
           <a
             href='#'
-            className='relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+            class='relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
           >
             {texts?.previous}
           </a>
           <a
             href='#'
-            className='ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+            class='ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
           >
             {texts?.next}
           </a>
         </div>
-        <div className='hidden sm:flex-1 sm:flex sm:items-center sm:justify-between'>
+        <div class='hidden sm:flex-1 sm:flex sm:items-center sm:justify-between'>
           <div>
-            <p className='text-sm text-gray-700 dark:text-gray-200'>
+            <p class='text-sm text-gray-700 dark:text-gray-200'>
               {texts?.summary
                 .replace('{currentPage}', (currentPageIdx + 1).toString())
                 .replace('{totalPages}', totalPages.toString())}
             </p>
           </div>
-          <div className='flex flex-col'>
+          <div class='flex flex-col'>
             {pageSizes && (
               <Select<number>
                 size='sm'
@@ -170,7 +170,7 @@ const Pagination = () => {
               />
             )}
             {showTotalCount && (
-              <p className='text-xs text-gray-700 dark:text-gray-400'>
+              <p class='text-xs text-gray-700 dark:text-gray-400'>
                 {texts?.total?.replace(
                   '{resultsCount}',
                   resultsCount.toString()
@@ -180,7 +180,7 @@ const Pagination = () => {
           </div>
           <div>
             <nav
-              className='relative z-0 inline-flex rounded-md shadow-sm -space-x-px'
+              class='relative z-0 inline-flex rounded-md shadow-sm -space-x-px'
               aria-label='Pagination'
             >
               {pageButtonsVariant === 'numbers' && <PageSelector />}

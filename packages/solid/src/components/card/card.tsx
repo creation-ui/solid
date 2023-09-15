@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge'
 
 export interface CardProps {
-  children?: React.ReactNode
+  children?: JSX.Element
   className?: string
 }
 
@@ -29,19 +29,19 @@ const classes = {
 }
 
 export const Card = ({ children, className }: CardProps) => {
-  return <div className={twMerge(className, classes.card)}>{children}</div>
+  return <div class={twMerge(className, classes.card)}>{children}</div>
 }
 
 const Header = ({ children, className }: CardProps) => {
-  return <h3 className={twMerge(className, classes.header)}>{children}</h3>
+  return <h3 class={twMerge(className, classes.header)}>{children}</h3>
 }
 
 const Body = ({ children, className }: CardProps) => {
-  return <div className={twMerge(className, classes.body)}>{children}</div>
+  return <div class={twMerge(className, classes.body)}>{children}</div>
 }
 
 const Footer = ({ children, className }: CardProps) => {
-  return <div className={twMerge(className, classes.footer)}>{children}</div>
+  return <div class={twMerge(className, classes.footer)}>{children}</div>
 }
 
 Card.Footer = Footer

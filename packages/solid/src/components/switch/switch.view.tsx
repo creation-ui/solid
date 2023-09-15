@@ -12,15 +12,15 @@ export const SwitchView = ({
   const { componentId, readOnly, disabled, classes } = useInputBase()
 
   return (
-    <div className={classes.container}>
+    <div class={classes.container}>
       <HSwitch
         {...props}
         id={componentId}
         disabled={disabled}
         aria-required={required}
-        className={switchClasses({ size, checked, readOnly })}
+        class={switchClasses({ size, checked, readOnly })}
       >
-        <span aria-hidden='true' className={switchCircle({ size, checked })} />
+        <span aria-hidden='true' class={switchCircle({ size, checked })} />
       </HSwitch>
     </div>
   )
