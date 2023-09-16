@@ -28,8 +28,7 @@
     "override-version": "sh ./override-version.sh",
     "generate:docs": "node ./scripts/generate-docs.js",
     "prettify": "prettier --write .",
-    "core": "pnpm i @creation-ui/core@latest -r"
-
+    "core": "pnpm -r add @creation-ui/core@latest"
   },
   "type": "module",
   "devDependencies": {

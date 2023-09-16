@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@babel/core': ^7.21.3
-  '@creation-ui/core': ^0.4.4
+  '@creation-ui/core': ^0.4.5
   '@headlessui/tailwindcss': ^0.1.3
   '@rollup/plugin-babel': ^6.0.3
   '@rollup/plugin-commonjs': ^24.0.1
@@ -49,7 +49,7 @@ specifiers:
   uuid: ^9.0.0
 
 dependencies:
-  '@creation-ui/core': 0.4.4_doddzzp776t3gxshu6xcqprcoe
+  '@creation-ui/core': 0.4.5_doddzzp776t3gxshu6xcqprcoe
   '@headlessui/tailwindcss': 0.1.3_tailwindcss@3.3.3
   '@tanstack/match-sorter-utils': 8.8.4
   '@tanstack/solid-table': 8.9.11_solid-js@1.7.11
@@ -316,8 +316,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@creation-ui/core/0.4.4_doddzzp776t3gxshu6xcqprcoe:
-    resolution: {integrity: sha512-TjyfH9OYNmljuDu/Xpa2oP+GvY7D/c6C0zmJDDgcxPkQrKsgqBolirG2wtKJEnpAjlLjVduNW10EOnSIh5QP8w==}
+  /@creation-ui/core/0.4.5_doddzzp776t3gxshu6xcqprcoe:
+    resolution: {integrity: sha512-YNKCZ4PsAqWL0E64iU2ECIMytlZRdCW2sESmir+eM8OsB6bSZfNtEtBsahi3dMH6ZqbZwP7pEOLWpmFkb7SyjA==}
     peerDependencies:
       tailwindcss: ^3.0
     dependencies:
