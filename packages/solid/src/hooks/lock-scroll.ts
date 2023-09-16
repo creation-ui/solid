@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react'
+import { onCleanup } from 'solid-js'
 import { isBrowser, off, on } from '@creation-ui/core'
 
 export function getClosestBody(
@@ -24,9 +24,14 @@ function preventDefault(rawEvent: TouchEvent): boolean {
   // Do not prevent if the event has more than one touch (usually meaning this is a multi touch gesture like pinch to zoom).
   if (e.touches?.length > 1) return true
 
-  if (e.preventDefault) e.preventDefault()
+  e.preventDefault?.()
 
   return false
+}
+
+export interface BodyInfoItem {
+  counter: number
+  initialOverflow: CSSStyleDeclaration['overflow']
 }
 
 export interface BodyInfoItem {
@@ -47,83 +52,69 @@ const doc: Document | undefined =
 
 let documentListenerAdded = false
 
-export default !doc
-  ? function useLockBodyMock(
-      _locked: boolean = true,
-      _elementRef?: RefObject<HTMLElement>
-    ) {}
-  : function useLockBody(
-      locked: boolean = true,
-      elementRef?: RefObject<HTMLElement>
-    ) {
-      const bodyRef = useRef(doc!.body)
-      elementRef = elementRef || bodyRef
+export default function useLockBody(
+  locked: boolean = true,
+  elementRef?: HTMLElement
+) {
+  const lock = (body: any) => {
+    const bodyInfo = bodies.get(body)
+    if (!bodyInfo) {
+      bodies.set(body, { counter: 1, initialOverflow: body.style.overflow })
+      if (isIosDevice) {
+        if (!documentListenerAdded) {
+          on(document, 'touchmove', preventDefault, { passive: false })
 
-      const lock = (body: any) => {
-        const bodyInfo = bodies.get(body)
-        if (!bodyInfo) {
-          bodies.set(body, { counter: 1, initialOverflow: body.style.overflow })
-          if (isIosDevice) {
-            if (!documentListenerAdded) {
-              on(document, 'touchmove', preventDefault, { passive: false })
-
-              documentListenerAdded = true
-            }
-          } else {
-            body.style.overflow = 'hidden'
-          }
-        } else {
-          bodies.set(body, {
-            counter: bodyInfo.counter + 1,
-            initialOverflow: bodyInfo.initialOverflow,
-          })
+          documentListenerAdded = true
         }
+      } else {
+        body.style.overflow = 'hidden'
       }
-
-      const unlock = (body: any) => {
-        const bodyInfo = bodies.get(body)
-        if (bodyInfo) {
-          if (bodyInfo.counter === 1) {
-            bodies.delete(body)
-            if (isIosDevice) {
-              body.ontouchmove = null
-
-              if (documentListenerAdded) {
-                off(document, 'touchmove', preventDefault)
-                documentListenerAdded = false
-              }
-            } else {
-              body.style.overflow = bodyInfo.initialOverflow
-            }
-          } else {
-            bodies.set(body, {
-              counter: bodyInfo.counter - 1,
-              initialOverflow: bodyInfo.initialOverflow,
-            })
-          }
-        }
-      }
-
-      useEffect(() => {
-        const body = getClosestBody(elementRef!.current)
-        if (!body) {
-          return
-        }
-        if (locked) {
-          lock(body)
-        } else {
-          unlock(body)
-        }
-      }, [locked, elementRef.current])
-
-      // clean up, on un-mount
-      useEffect(() => {
-        const body = getClosestBody(elementRef!.current)
-        if (!body) {
-          return
-        }
-        return () => {
-          unlock(body)
-        }
-      }, [])
+    } else {
+      bodies.set(body, {
+        counter: bodyInfo.counter + 1,
+        initialOverflow: bodyInfo.initialOverflow,
+      })
     }
+  }
+
+  const unlock = (body: any) => {
+    const bodyInfo = bodies.get(body)
+    if (bodyInfo) {
+      if (bodyInfo.counter === 1) {
+        bodies.delete(body)
+        if (isIosDevice) {
+          body.ontouchmove = null
+
+          if (documentListenerAdded) {
+            off(document, 'touchmove', preventDefault)
+            documentListenerAdded = false
+          }
+        } else {
+          body.style.overflow = bodyInfo.initialOverflow
+        }
+      } else {
+        bodies.set(body, {
+          counter: bodyInfo.counter - 1,
+          initialOverflow: bodyInfo.initialOverflow,
+        })
+      }
+    }
+  }
+
+  const body = getClosestBody(elementRef)
+  if (body) {
+    if (locked) {
+      lock(body)
+    } else {
+      unlock(body)
+    }
+  }
+
+  // equivalent to useEffect cleanup
+  onCleanup(() => {
+    const body = getClosestBody(elementRef)
+    if (body) {
+      unlock(body)
+    }
+  })
+}

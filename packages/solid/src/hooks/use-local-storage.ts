@@ -1,14 +1,6 @@
 import { noop, isBrowser } from '@creation-ui/core'
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useState,
-  useRef,
-  useLayoutEffect,
-} from 'react'
 
-type parserOptions<T> =
+type ParserOptions<T> =
   | {
       raw: true
     }
@@ -17,14 +9,15 @@ type parserOptions<T> =
       serializer: (value: T) => string
       deserializer: (value: string) => T
     }
+import { createSignal, onCleanup } from 'solid-js'
 
 const useLocalStorage = <T>(
   key: string,
   initialValue?: T,
-  options?: parserOptions<T>
-): [T | undefined, Dispatch<SetStateAction<T | undefined>>, () => void] => {
+  options?: ParserOptions<T>
+) => {
   if (!isBrowser) {
-    return [initialValue as T, noop, noop]
+    return [() => initialValue, noop, noop]
   }
   if (!key) {
     throw new Error('useLocalStorage key may not be falsy')
@@ -33,20 +26,16 @@ const useLocalStorage = <T>(
   const deserializer = options
     ? options.raw
       ? value => value
-      : // @ts-ignore
-        options.deserializer
+      : options.deserializer
     : JSON.parse
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const initializer = useRef((key: string) => {
+  const initializer = (key: string) => {
     try {
       const serializer = options
         ? options.raw
           ? String
-          : // @ts-ignore
-            options.serializer
+          : options.serializer
         : JSON.stringify
-
       const localStorageValue = localStorage.getItem(key)
       if (localStorageValue !== null) {
         return deserializer(localStorageValue)
@@ -55,61 +44,40 @@ const useLocalStorage = <T>(
         return initialValue
       }
     } catch {
-      // If user is in private mode or has storage restriction
-      // localStorage can throw. JSON.parse and JSON.stringify
-      // can throw, too.
       return initialValue
     }
-  })
+  }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [state, setState] = useState<T | undefined>(() =>
-    initializer.current(key)
-  )
+  const [state, setState] = createSignal<T | undefined>(initializer(key))
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useLayoutEffect(() => setState(initializer.current(key)), [key])
+  onCleanup(() => setState(initializer(key)))
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const set: Dispatch<SetStateAction<T | undefined>> = useCallback(
-    valOrFunc => {
-      try {
-        const newState =
-          typeof valOrFunc === 'function'
-            ? (valOrFunc as Function)(state)
-            : valOrFunc
-        if (typeof newState === 'undefined') return
-        let value: string
+  const set = (valOrFunc: any) => {
+    try {
+      const newState =
+        typeof valOrFunc === 'function' ? valOrFunc(state()) : valOrFunc
+      if (typeof newState === 'undefined') return
+      let value: string
 
-        if (options)
-          if (options.raw)
-            if (typeof newState === 'string') value = newState
-            else value = JSON.stringify(newState)
-          // @ts-ignore
-          else if (options.serializer) value = options.serializer(newState)
+      if (options)
+        if (options.raw) {
+          if (typeof newState === 'string') value = newState
           else value = JSON.stringify(newState)
+        } else if (options.serializer) value = options.serializer(newState)
         else value = JSON.stringify(newState)
+      else value = JSON.stringify(newState)
 
-        localStorage.setItem(key, value)
-        setState(deserializer(value))
-      } catch {
-        // If user is in private mode or has storage restriction
-        // localStorage can throw. Also JSON.stringify can throw.
-      }
-    },
-    [key, setState]
-  )
+      localStorage.setItem(key, value)
+      setState(deserializer(value))
+    } catch {}
+  }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const remove = useCallback(() => {
+  const remove = () => {
     try {
       localStorage.removeItem(key)
       setState(undefined)
-    } catch {
-      // If user is in private mode or has storage restriction
-      // localStorage can throw.
-    }
-  }, [key, setState])
+    } catch {}
+  }
 
   return [state, set, remove]
 }
