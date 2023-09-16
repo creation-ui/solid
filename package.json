@@ -1,6 +1,6 @@
 {
   "name": "@creation-ui/solid",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0",
   "description": "Solid.js UI library.",
   "author": {
     "name": "Paweł Krystkiewicz",
@@ -27,7 +27,9 @@
     "e2e:dev": "pnpm package:build && cypress open",
     "override-version": "sh ./override-version.sh",
     "generate:docs": "node ./scripts/generate-docs.js",
-    "prettify": "prettier --write ."
+    "prettify": "prettier --write .",
+    "core": "pnpm i @creation-ui/core@latest -r"
+
   },
   "type": "module",
   "devDependencies": {

@@ -1,12 +1,12 @@
 import type { HTMLProps, SVGProps } from 'react'
-import type { ClassName, IconType } from '@creation-ui/core'
+import type { ClassName, InternalIconType } from '@creation-ui/core'
 
 export interface IconProps
   extends Omit<HTMLProps<HTMLDivElement>, 'className'> {
   /**
    * Icon name from Material Icons collection
    */
-  icon: IconType
+  icon: InternalIconType
   /**
    * Additional class names
    */

@@ -1,4 +1,4 @@
-import type { IconType } from '@creation-ui/core'
+import type { InternalIconType } from '@creation-ui/core'
 import { twMerge } from 'tailwind-merge'
 import { Check } from './check'
 import { ChevronDown } from './chevron-down'
@@ -23,7 +23,7 @@ const classes = [
 ]
 
 const Icon = ({ icon, className, ...props }: IconProps) => {
-  const map: Record<IconType, any> = {
+  const map: Record<InternalIconType, any> = {
     chevron_right: ChevronRight,
     chevron_left: ChevronLeft,
     chevron_down: ChevronDown,

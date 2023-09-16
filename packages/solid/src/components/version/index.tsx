@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import type { CommitInfo } from '@creation-ui/core'
+import { Component } from 'solid-js'
 
 interface VersionProps {
   classNameOverride?: string
@@ -8,11 +9,12 @@ interface VersionProps {
 
 const zeroPad = (n: number) => n.toString().padStart(2, '0')
 
-export const Version = ({ classNameOverride, gitHash }: VersionProps) => {
+export const Version: Component<VersionProps> = ({
+  classNameOverride,
+  gitHash,
+}) => {
   const { shortHash, hash, version, timestamp } = gitHash
   const date = new Date(timestamp)
-
-  const datePL = date.toLocaleString('pl', {})
 
   const [month, day, year] = [
     date.getMonth(),
@@ -47,10 +49,10 @@ export const Version = ({ classNameOverride, gitHash }: VersionProps) => {
 
   return (
     <div
-      style={{ fontSize: 8 }}
-      class={
+      class={clsx(
+        'text-[8px]',
         classNameOverride ? classNameOverride : 'absolute bottom-0 right-0 px-2'
-      }
+      )}
     >
       <span
         title={'Version'}
@@ -61,11 +63,7 @@ export const Version = ({ classNameOverride, gitHash }: VersionProps) => {
       -
       <span
         title={`Last commit hash: ${hash}`}
-        class={clsx(
-          classNames,
-          'hover:bg-orange-100',
-          'hover:ring-orange-200'
-        )}
+        class={clsx(classNames, 'hover:bg-orange-100', 'hover:ring-orange-200')}
       >
         {shortHash}
       </span>

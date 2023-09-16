@@ -4,14 +4,7 @@ import type { BoxProps } from './box.types'
 const box = cva([], {
   variants: {
     body: {
-      base: [
-        'flex',
-        'justify-center',
-        'bg-info-50',
-        'dark:bg-info-900',
-        'dark:text-info-50',
-        'rounded-lg',
-      ],
+      base: ['flex', 'justify-center', 'dark:text-info-50', 'rounded-lg'],
     },
     content: {
       base: [
@@ -32,7 +25,7 @@ const box = cva([], {
 })
 
 export const Box = ({ children, className, border = true }: BoxProps) => (
-  <div class={box({ body: 'base', className, border })}>
-    <div class={box({ content: 'base' })}>{children}</div>
+  <div class={box({ body: 'base', className })}>
+    <div class={box({ content: 'base', border })}>{children}</div>
   </div>
 )
