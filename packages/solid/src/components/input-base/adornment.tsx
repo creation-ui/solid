@@ -1,6 +1,6 @@
-import { FC } from 'react'
-import { HTMLInputType } from '@creation-ui/core'
-import { inputIcon } from '@creation-ui/core'
+import { HTMLInputType, inputIcon } from '@creation-ui/core'
+import { Component, splitProps } from 'solid-js'
+import { JSX } from 'solid-js/jsx-runtime'
 
 interface AdornmentProps {
   adornment?: JSX.Element
@@ -8,12 +8,21 @@ interface AdornmentProps {
   type?: HTMLInputType
 }
 
-export const Adornment: FC<AdornmentProps> = ({ position, type, adornment }) =>
-  adornment ? (
+export const Adornment: Component<AdornmentProps> = props => {
+  const [{ position, type, adornment }] = splitProps(props, [
+    'position',
+    'type',
+    'adornment',
+  ])
+  return adornment ? (
     <div
-      // @ts-expect-error
-      class={inputIcon({ position, type })}
+      class={inputIcon({
+        position,
+        // @ts-expect-error
+        type,
+      })}
     >
       {adornment}
     </div>
   ) : null
+}

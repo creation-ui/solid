@@ -1,10 +1,19 @@
+import { splitProps } from 'solid-js'
 import { useTheme } from '../../theme'
 import { loaderClasses, loaderIconClasses } from './classes'
 import type { LoaderProps } from './loader.types'
 
+const UI_PROPS_KEYS: readonly (keyof LoaderProps)[] = [
+  'size',
+  'className',
+  'white',
+  'active',
+]
+
 export const Loader = (props: LoaderProps) => {
+  const [ui] = splitProps(props, UI_PROPS_KEYS)
   const { size: defaultSize } = useTheme()
-  const { size = defaultSize, className, white, active } = props
+  const { size = defaultSize, className, white, active } = ui
 
   return (
     <div class={loaderClasses({ size, className, active })}>

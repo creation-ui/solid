@@ -10,4 +10,8 @@ export interface LoaderProps
    * Is visible? Default true
    */
   active?: boolean
+  /**
+   * Loader CSS classes
+   */
+  class?: string
 }

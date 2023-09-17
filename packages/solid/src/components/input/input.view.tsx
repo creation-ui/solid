@@ -1,25 +1,21 @@
-import type { Ref } from 'react'
-import { forwardRef } from 'react'
+import { Component } from 'solid-js'
 import { useInputBase } from '../input-base/input-base.context'
-import { InputProps } from './input.types'
+import { InputViewProps } from './types'
 
-export const InputView = forwardRef(
-  (props: Omit<InputProps, 'size'>, ref: Ref<HTMLInputElement>) => {
-    const { componentId, classes, readOnly, error, type, disabled } =
-      useInputBase()
+export const InputView: Component<InputViewProps> = props => {
+  const { componentId, classes, readOnly, error, type, disabled } =
+    useInputBase()
 
-    return (
-      <input
-        ref={ref}
-        id={componentId}
-        class={classes.input}
-        type={type}
-        disabled={disabled}
-        aria-invalid={error}
-        aria-readonly={readOnly}
-        readOnly={readOnly}
-        {...props}
-      />
-    )
-  },
-)
+  return (
+    <input
+      id={componentId}
+      class={classes.input}
+      type={type}
+      disabled={disabled}
+      aria-invalid={!!error}
+      aria-readonly={!!readOnly}
+      readOnly={readOnly}
+      {...props}
+    />
+  )
+}

@@ -1,35 +1,60 @@
-import type { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import {
+  InputBaseProps,
   errorClasses,
   inputClassesCVA,
   inputContainer,
   label,
   text,
 } from '@creation-ui/core'
+import { ParentComponent, splitProps } from 'solid-js'
+import { twMerge } from 'tailwind-merge'
 import { useId } from '../../hooks'
 import { useTheme } from '../../theme'
-import { InputBaseProps } from '@creation-ui/core'
 import { InteractiveContainer } from '../interactive-container'
 import { Loader } from '../loader'
 import { Description } from '../typography'
-import { InputBaseContext } from './input-base.context'
+import { InputBaseProvider } from './input-base.context'
 
-const InputBaseInline: FC<InputBaseProps> = props => {
+interface InputProps extends InputBaseProps {
+  ref?: any
+}
+
+const UI_PROPS_KEYS: readonly (keyof InputProps)[] = [
+  'loading',
+  'helperText',
+  'error',
+  'size',
+  'type',
+  'cx',
+  'id',
+  'children',
+  'startAdornment',
+  'endAdornment',
+  'clearable',
+  'variant',
+  'layout',
+  'interactionsDisabled',
+  'onClear',
+  'ref',
+]
+
+const InputBaseInline: ParentComponent<InputProps> = props => {
   const { size: defaultSize } = useTheme()
-  const {
-    loading,
-    helperText,
-    error,
-    size = defaultSize,
-    type = 'text',
-    cx,
-    id,
-    children,
-    variant,
-    layout = 'row',
-    // onClear,
-  } = props
+  const [
+    {
+      loading,
+      helperText,
+      error,
+      size = defaultSize,
+      type = 'text',
+      cx,
+      id,
+      children,
+      variant,
+      layout = 'row',
+      // onClear,
+    },
+  ] = splitProps(props, UI_PROPS_KEYS)
   const componentId = useId(id)
 
   const disabled = props.disabled
@@ -38,7 +63,7 @@ const InputBaseInline: FC<InputBaseProps> = props => {
   const outerContainerClasses = twMerge(
     inputContainer({ disabled, error: !!error, layout }),
     text({ size }),
-    cx?.container?.inner,
+    cx?.container?.inner
   )
 
   const inputClasses = twMerge(
@@ -48,12 +73,12 @@ const InputBaseInline: FC<InputBaseProps> = props => {
       // @ts-ignore
       className: cx?.input,
       error: !!error,
-    }),
+    })
   )
 
   return (
     <InteractiveContainer disabled={disabled}>
-      <InputBaseContext.Provider
+      <InputBaseProvider
         value={{
           componentId,
           classes: {
@@ -70,7 +95,7 @@ const InputBaseInline: FC<InputBaseProps> = props => {
           <div class={outerContainerClasses}>
             {children}
             <label
-              htmlFor={componentId}
+              for={componentId}
               class={label({
                 size,
                 required: props.required,
@@ -89,7 +114,7 @@ const InputBaseInline: FC<InputBaseProps> = props => {
             {error || helperText}
           </Description>
         </div>
-      </InputBaseContext.Provider>
+      </InputBaseProvider>
     </InteractiveContainer>
   )
 }

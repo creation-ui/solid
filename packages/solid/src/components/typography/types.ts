@@ -1,10 +1,17 @@
-import { ElementType } from 'react'
-import { ClassName, ElementSize, TypographyConfig } from '@creation-ui/core'
+import {
+  ClassName,
+  ElementSize,
+  IntrinsicElements,
+  TypographyConfig,
+} from '@creation-ui/core'
+import { JSX } from 'solid-js'
 
-export interface TypographyProps extends React.ComponentProps<any> {
-  as?: ElementType
+export interface TypographyProps {
+  as?: IntrinsicElements
   children?: JSX.Element
   config?: Partial<TypographyConfig>
-  className?: ClassName
+  class?: ClassName
   size?: ElementSize
+  error?: JSX.Element
+  ref?: any
 }

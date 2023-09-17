@@ -1,10 +1,9 @@
-import type { ElementType } from 'react'
-import type { ElementTypography } from '@creation-ui/core'
+import type { ElementTypography, IntrinsicElements } from '@creation-ui/core'
 
 export const getElementType = (
-  variant: ElementTypography = 'content',
-): ElementType => {
-  const map: Record<ElementTypography, ElementType> = {
+  variant: ElementTypography = 'content'
+): IntrinsicElements => {
+  const map: Record<ElementTypography, IntrinsicElements> = {
     h1: 'h1',
     h2: 'h2',
     h3: 'h3',

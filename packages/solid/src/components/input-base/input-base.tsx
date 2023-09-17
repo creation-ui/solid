@@ -1,7 +1,5 @@
-import clsx from 'clsx'
-import { forwardRef } from 'react'
-import { twMerge } from 'tailwind-merge'
 import {
+  InputBaseProps,
   errorClasses,
   inputClassesCVA,
   inputContainer,
@@ -9,9 +7,11 @@ import {
   label,
   text,
 } from '@creation-ui/core'
+import clsx from 'clsx'
+import { ParentComponent, splitProps } from 'solid-js'
+import { twMerge } from 'tailwind-merge'
 import { useId } from '../../hooks'
 import { useTheme } from '../../theme'
-import { InputBaseProps } from '@creation-ui/core'
 import { ClearButton } from '../clear-button'
 import { InteractiveContainer } from '../interactive-container'
 import { Loader } from '../loader'
@@ -19,27 +19,54 @@ import { Description } from '../typography'
 import { Adornment } from './adornment'
 import { UNSTYLED_TYPES } from './constants'
 import { InputBaseContainerInner } from './input-base.container-inner'
-import { InputBaseContext } from './input-base.context'
+import { InputBaseProvider } from './input-base.context'
 
-const InputBase = forwardRef<HTMLDivElement, InputBaseProps>((props, ref) => {
+interface InputProps extends InputBaseProps {
+  ref?: any
+}
+
+const UI_PROPS_KEYS: readonly (keyof InputProps)[] = [
+  'loading',
+  'helperText',
+  'error',
+  'size',
+  'type',
+  'cx',
+  'id',
+  'children',
+  'startAdornment',
+  'endAdornment',
+  'clearable',
+  'variant',
+  'layout',
+  'interactionsDisabled',
+  'onClear',
+  'ref',
+]
+
+const InputBase: ParentComponent<InputProps> = props => {
   const { size: defaultSize, variant: defaultVariant = 'outlined' } = useTheme()
-  const {
-    loading,
-    helperText,
-    error,
-    size = defaultSize,
-    type = 'text',
-    cx,
-    id,
-    children,
-    startAdornment,
-    endAdornment,
-    clearable,
-    variant = defaultVariant,
-    layout = 'column',
-    interactionsDisabled,
-    onClear,
-  } = props
+  const [
+    {
+      loading,
+      helperText,
+      error,
+      size = defaultSize,
+      type = 'text',
+      cx,
+      id,
+      children,
+      startAdornment,
+      endAdornment,
+      clearable,
+      variant = defaultVariant,
+      layout = 'column',
+      interactionsDisabled,
+      ref,
+      onClear,
+    },
+  ] = splitProps(props, UI_PROPS_KEYS)
+
   const componentId = useId(id)
 
   const disabled = props.disabled
@@ -49,7 +76,7 @@ const InputBase = forwardRef<HTMLDivElement, InputBaseProps>((props, ref) => {
   const outerContainerClasses = twMerge(
     inputContainer({ disabled, error: !!error, layout }),
     text({ size }),
-    cx?.container?.outer,
+    cx?.container?.outer
   )
 
   const isUnstyled = UNSTYLED_TYPES.includes(type)
@@ -67,28 +94,26 @@ const InputBase = forwardRef<HTMLDivElement, InputBaseProps>((props, ref) => {
       clearable,
       error: hasError,
       interactionsDisabled,
-      // @ts-ignore
       className: cx?.input,
       // @ts-expect-error
       type,
-    }),
+    })
   )
-
   return (
-    <InteractiveContainer disabled={disabled}>
-      <InputBaseContext.Provider
-        value={{
-          componentId,
-          classes: { input: inputClasses, container: outerContainerClasses },
-          disabled,
-          readOnly,
-          error: !!error,
-          type,
-        }}
-      >
+    <InputBaseProvider
+      value={{
+        componentId,
+        classes: { input: inputClasses, container: outerContainerClasses },
+        disabled,
+        readOnly,
+        error: !!error,
+        type,
+      }}
+    >
+      <InteractiveContainer disabled={disabled}>
         <div class={outerContainerClasses}>
           <label
-            htmlFor={componentId}
+            for={componentId}
             class={label({
               size,
               required: props.required,
@@ -132,9 +157,9 @@ const InputBase = forwardRef<HTMLDivElement, InputBaseProps>((props, ref) => {
             {error || helperText}
           </Description>
         </div>
-      </InputBaseContext.Provider>
-    </InteractiveContainer>
+      </InteractiveContainer>
+    </InputBaseProvider>
   )
-})
+}
 
 export default InputBase

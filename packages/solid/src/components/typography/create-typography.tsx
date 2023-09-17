@@ -1,34 +1,16 @@
-import React from 'react'
 import type { ElementTypography } from '@creation-ui/core'
-import { useTheme } from '../../theme'
-import { useTypography } from './use-typography'
+import { splitProps } from 'solid-js'
 import { TypographyProps } from './types'
+import { TypoComponent } from './typo-component'
 
 export const createTypographyComponent = (variant: ElementTypography) => {
-  return React.forwardRef<HTMLElement, TypographyProps>((props, ref) => {
-    const { typography, size: defaultSize } = useTheme()
-    const {
-      as,
-      config,
-      className,
-      children,
-      size = defaultSize,
-      error,
-      ...rest
-    } = props
-
-    const { classes, Component } = useTypography({
-      as,
-      config,
-      className,
-      typography,
-      variant,
-    })
+  return (props: TypographyProps) => {
+    const [{ children }, rest] = splitProps(props, ['children'])
 
     return (
-      <Component {...rest} ref={ref} class={classes({ size })}>
+      <TypoComponent {...rest} variant={variant}>
         {children}
-      </Component>
+      </TypoComponent>
     )
-  })
+  }
 }

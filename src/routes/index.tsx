@@ -1,5 +1,5 @@
 import Counter from '@components/Counter'
-import { Box } from '@creation-ui/solid/components'
+import { Box } from '@creation-ui/solid'
 
 export default function Home() {
   return (

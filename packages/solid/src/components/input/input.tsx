@@ -1,25 +1,21 @@
-import { forwardRef } from 'react'
+import { Component, mergeProps, splitProps } from 'solid-js'
 import { useTheme } from '../../theme'
 import { InputBase } from '../input-base'
-import type { InputProps } from './input.types'
 import { InputView } from './input.view'
+import type { InputProps } from './types'
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const Input: Component<InputProps> = props => {
   const { size: defaultSize } = useTheme()
-  const {
-    size = defaultSize,
-    type = 'text',
-    variant = 'outlined',
-    ...rest
-  } = props
+  const [
+    { size = defaultSize, type = 'text', variant = 'outlined', ref },
+    rest,
+  ] = splitProps(props, ['size', 'type', 'variant', 'ref'])
 
   return (
-    <InputBase {...rest} size={size} type={type} variant={variant} ref={ref}>
-      <InputView {...rest} ref={ref} variant={variant} />
+    <InputBase {...mergeProps(rest, size, type, variant)}>
+      <InputView {...mergeProps(rest, ref)} />
     </InputBase>
   )
-})
-
-Input.displayName = 'Input'
+}
 
 export default Input
