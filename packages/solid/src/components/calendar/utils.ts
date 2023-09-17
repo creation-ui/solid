@@ -6,14 +6,14 @@ export const getFirstDayOfWeek = (date, weekStartsOn) => {
   return new Date(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate() - daysToShift
+    date.getDate() - daysToShift,
   )
 }
 
 export const changeCalendarView = (
   date: Date,
   view: CalendarView,
-  direction: 'next' | 'prev'
+  direction: 'next' | 'prev',
 ) => {
   const sign = direction === 'next' ? 1 : -1
 

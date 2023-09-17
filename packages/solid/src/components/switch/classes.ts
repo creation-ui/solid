@@ -1,5 +1,9 @@
 import { cva } from 'class-variance-authority'
-import { microInteractions, classes, sharedReadOnlyCVA } from '@creation-ui/core'
+import {
+  microInteractions,
+  classes,
+  sharedReadOnlyCVA,
+} from '@creation-ui/core'
 
 export const switchClasses = cva(
   [
@@ -34,7 +38,7 @@ export const switchClasses = cva(
     defaultVariants: {
       size: 'md',
     },
-  }
+  },
 )
 export const switchCircle = cva(
   [
@@ -75,5 +79,5 @@ export const switchCircle = cva(
         className: ['translate-x-7'],
       },
     ],
-  }
+  },
 )

@@ -25,5 +25,5 @@ export const overlay = cva(
         false: ['cursor-default'],
       },
     },
-  }
+  },
 )

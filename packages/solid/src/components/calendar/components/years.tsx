@@ -32,7 +32,7 @@ export const CalendarYearsView = () => {
     rows.push(
       <div key={i} class='flex justify-between mb-2'>
         {yearsGrid.slice(i, i + 4)}
-      </div>
+      </div>,
     )
   }
 

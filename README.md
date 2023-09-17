@@ -1,7 +1,5 @@
 # Creation UI - Solid
 
-
-
 ## Components planned for Solid.js framework:
 
 - [ ] [Autocomplete](/docs/components/autocomplete)

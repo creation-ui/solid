@@ -20,7 +20,7 @@ export const Overlay = ({
           cursorWait,
         }),
         zIndex?.overlays,
-        className
+        className,
       )}
       onClick={onClick}
     >

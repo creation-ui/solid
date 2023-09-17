@@ -23,7 +23,7 @@ export const popoverContentClasses = cva(
     variants: {
       size: sharedTextSizesBase,
     },
-  }
+  },
 )
 export const popoverDescriptionClasses = cva(
   [
@@ -36,7 +36,7 @@ export const popoverDescriptionClasses = cva(
     variants: {
       size: sharedTextSizesDescription,
     },
-  }
+  },
 )
 export const popoverHeadingClasses = cva(['font-bold'], {
   variants: {
@@ -52,5 +52,5 @@ export const popoverTriggerClasses = cva(
     variants: {
       size: sharedTextSizesBase,
     },
-  }
+  },
 )

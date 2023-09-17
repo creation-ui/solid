@@ -37,7 +37,7 @@ const progressValue = cva(
         lg: ['!text-base'],
       },
     },
-  }
+  },
 )
 
 const progressBar = cva(
@@ -71,7 +71,7 @@ const progressBar = cva(
       size: 'md',
       status: 'primary',
     },
-  }
+  },
 )
 
 const formatDisplayValueDefault = (value: number) => `${value}%`

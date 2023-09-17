@@ -73,8 +73,8 @@ export function Autocomplete<T>(props: AutocompleteProps<T>) {
 
         console.error(
           `CUI: The \`getOptionLabel\` method of [Autocomplete:${id}] returned ${erroneousReturn} instead of a string for ${JSON.stringify(
-            option
-          )}.`
+            option,
+          )}.`,
         )
       }
 
@@ -143,7 +143,7 @@ export function Autocomplete<T>(props: AutocompleteProps<T>) {
   })
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, dismiss, listNav]
+    [role, dismiss, listNav],
   )
 
   function onInputChange({
@@ -165,7 +165,7 @@ export function Autocomplete<T>(props: AutocompleteProps<T>) {
     ? options.filter(option => {
         if (
           ((multiple ? value : [value]) as T[]).some(v =>
-            isOptionEqualToValue(option, v)
+            isOptionEqualToValue(option, v),
           )
         ) {
           return false
@@ -258,7 +258,7 @@ export function Autocomplete<T>(props: AutocompleteProps<T>) {
 
   const getOptionProps = (
     option: T,
-    index: number
+    index: number,
   ): AutocompleteOptionProps => {
     const active = activeIndex === index
     const selected = isOptionEqualToValue(option, value)

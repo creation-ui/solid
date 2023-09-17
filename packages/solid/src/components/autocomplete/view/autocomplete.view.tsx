@@ -40,7 +40,7 @@ export const AutocompleteView: FC = () => {
                 id={componentId}
                 class={clsx(
                   'reset-input h-fit',
-                  propsInput.className as string
+                  propsInput.className as string,
                 )}
               />
             )}
@@ -57,9 +57,7 @@ export const AutocompleteView: FC = () => {
                 {hasOptions ? (
                   options?.map(renderOptionInternalContainer)
                 ) : (
-                  <li class={'py-2 px-3 w-full text-center'}>
-                    {textNotFound}
-                  </li>
+                  <li class={'py-2 px-3 w-full text-center'}>{textNotFound}</li>
                 )}
               </DropdownMenu>
             </FloatingFocusManager>

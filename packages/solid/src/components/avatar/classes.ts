@@ -25,7 +25,7 @@ export const avatar = {
         size: 'md',
         variant: 'circle',
       },
-    }
+    },
   ),
   notifications: cva(
     [
@@ -76,7 +76,7 @@ export const avatar = {
       defaultVariants: {
         color: 'error',
       },
-    }
+    },
   ),
   pulse: cva([], {
     variants: {

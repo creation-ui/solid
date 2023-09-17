@@ -234,5 +234,5 @@ export const button = cva(
         className: ['px-1', 'h-20', 'w-20', '!rounded-full'],
       },
     ],
-  }
+  },
 )

@@ -1,7 +1,7 @@
 export function getSortedSizes(
   pageSizes: number[] = [],
   totalInSizesSelector: boolean | undefined,
-  resultsCount: number
+  resultsCount: number,
 ): number[] {
   let sizes = new Set(pageSizes)
 

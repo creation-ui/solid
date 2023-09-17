@@ -21,5 +21,5 @@ export const InputView = forwardRef(
         {...props}
       />
     )
-  }
+  },
 )

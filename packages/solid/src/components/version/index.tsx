@@ -51,7 +51,9 @@ export const Version: Component<VersionProps> = ({
     <div
       class={clsx(
         'text-[8px]',
-        classNameOverride ? classNameOverride : 'absolute bottom-0 right-0 px-2'
+        classNameOverride
+          ? classNameOverride
+          : 'absolute bottom-0 right-0 px-2',
       )}
     >
       <span

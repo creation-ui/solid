@@ -54,7 +54,7 @@ const calloutClasses = cva(
         className: '!bg-error-200',
       },
     ],
-  }
+  },
 )
 
 export const Callout = (props: CalloutProps) => {
@@ -71,16 +71,13 @@ export const Callout = (props: CalloutProps) => {
   const isStatusValid = validateEnumProp(props.status, ELEMENT_STATUS as any)
   const isVariantValid = validateEnumProp(
     props.variant,
-    ELEMENT_VARIANTS as any
+    ELEMENT_VARIANTS as any,
   )
   const status = isStatusValid ? props.status : 'info'
   const variant = isVariantValid ? props.variant : 'contained'
 
   return (
-    <div
-      class={calloutClasses({ status, variant, className })}
-      role='alert'
-    >
+    <div class={calloutClasses({ status, variant, className })} role='alert'>
       {icon}
       <div class={clsx('flex', 'flex-col', 'w-full')}>
         {title && (

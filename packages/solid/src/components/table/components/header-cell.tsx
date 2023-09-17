@@ -38,7 +38,7 @@ const headerCellClass = cva(
     defaultVariants: {
       align: 'left',
     },
-  }
+  },
 )
 
 export default function HeaderCell({ header }: HeaderCellProps) {

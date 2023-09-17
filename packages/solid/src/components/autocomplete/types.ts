@@ -46,7 +46,7 @@ export interface AutocompleteProps<T = AutocompleteOptionDefault>
    */
   filterOptions?: (
     options: T[],
-    filterOptions: AutocompleteFilterOptions
+    filterOptions: AutocompleteFilterOptions,
   ) => T[]
   /**
    * List options
@@ -116,7 +116,7 @@ export interface AutocompleteProps<T = AutocompleteOptionDefault>
 }
 
 export interface AutocompleteFilterOptionsConfig<
-  T = AutocompleteOptionDefault
+  T = AutocompleteOptionDefault,
 > {
   ignoreAccents?: boolean
   ignoreCase?: boolean

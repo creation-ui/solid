@@ -58,5 +58,5 @@ export const drawer = cva(
       position: 'right',
       size: 'md',
     },
-  }
+  },
 )

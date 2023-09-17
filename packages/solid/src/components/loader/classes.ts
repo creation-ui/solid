@@ -21,7 +21,7 @@ export const loaderClasses = cva(
       size: 'md',
       active: true,
     },
-  }
+  },
 )
 export const loaderIconClasses = cva(['animate-spin'], {
   variants: {

@@ -23,7 +23,7 @@ export const calendarClasses = {
           lg: ['w-[406px]', 'h-96'],
         },
       },
-    }
+    },
   ),
 }
 

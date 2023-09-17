@@ -13,7 +13,7 @@ const Button: ParentComponent<ButtonProps> = props => {
   const [
     //
     ui,
-    rest
+    rest,
   ] = splitProps(props, [
     'children',
     'loading',
@@ -58,7 +58,7 @@ const Button: ParentComponent<ButtonProps> = props => {
       disabled,
       uppercase,
       className: [theme.roundness, className, text({ size })],
-    })
+    }),
   )
 
   const centerSpinner: boolean = Boolean(loading && circle)

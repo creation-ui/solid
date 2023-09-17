@@ -1,7 +1,7 @@
-import { getShortUUID } from '@creation-ui/core';
+import { getShortUUID } from '@creation-ui/core'
 
 function useId(providedId?: string) {
-  return providedId || getShortUUID();
+  return providedId || getShortUUID()
 }
 
-export default useId;
+export default useId

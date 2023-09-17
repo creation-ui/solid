@@ -47,7 +47,7 @@ const Table = () => {
                 '-translate-x-1/2',
                 'top-1/2',
                 '-translate-y-1/2',
-                'w-2/3'
+                'w-2/3',
               )}
             >
               <Callout
@@ -59,10 +59,7 @@ const Table = () => {
             </div>
           </div>
         ) : (
-          <tbody
-            class={bodyClasses()}
-            style={{ height, maxHeight: height }}
-          >
+          <tbody class={bodyClasses()} style={{ height, maxHeight: height }}>
             {data.rows.map(row => (
               <Row key={row.id} row={row} />
             ))}

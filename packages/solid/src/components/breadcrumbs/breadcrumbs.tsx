@@ -59,11 +59,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
             index={idx}
             link={link}
             separator={
-              idx === 0 ? (
-                <div class='mr-1'>{homeIcon}</div>
-              ) : (
-                separatingIcon
-              )
+              idx === 0 ? <div class='mr-1'>{homeIcon}</div> : separatingIcon
             }
             key={link.href}
           />

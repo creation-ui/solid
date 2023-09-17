@@ -9,7 +9,7 @@ export default function Home() {
         A box. No idea what it does.
         <br />I don't think there's docs for it.
       </Box>
-      <input type="text"></input>
+      <input type='text'></input>
     </main>
   )
 }

@@ -54,7 +54,7 @@ const PageSelector = () => {
 
   const pagesArray = useMemo(
     () => Array.from({ length: totalPages }, (_, i) => i),
-    [totalPages]
+    [totalPages],
   )
 
   const goToPage = (idx: number) => table.setPageIndex(idx)
@@ -173,7 +173,7 @@ const Pagination = () => {
               <p class='text-xs text-gray-700 dark:text-gray-400'>
                 {texts?.total?.replace(
                   '{resultsCount}',
-                  resultsCount.toString()
+                  resultsCount.toString(),
                 )}
               </p>
             )}

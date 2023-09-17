@@ -2,7 +2,7 @@ import { onCleanup } from 'solid-js'
 import { isBrowser, off, on } from '@creation-ui/core'
 
 export function getClosestBody(
-  el: Element | HTMLElement | HTMLIFrameElement | null
+  el: Element | HTMLElement | HTMLIFrameElement | null,
 ): HTMLElement | null {
   if (!el) {
     return null
@@ -54,7 +54,7 @@ let documentListenerAdded = false
 
 export default function useLockBody(
   locked: boolean = true,
-  elementRef?: HTMLElement
+  elementRef?: HTMLElement,
 ) {
   const lock = (body: any) => {
     const bodyInfo = bodies.get(body)

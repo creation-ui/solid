@@ -14,7 +14,7 @@ import { createSignal, onCleanup } from 'solid-js'
 const useLocalStorage = <T>(
   key: string,
   initialValue?: T,
-  options?: ParserOptions<T>
+  options?: ParserOptions<T>,
 ) => {
   if (!isBrowser) {
     return [() => initialValue, noop, noop]

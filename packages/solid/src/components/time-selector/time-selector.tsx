@@ -17,7 +17,7 @@ const cellClasses = cva(
         false: '',
       },
     },
-  }
+  },
 )
 
 const columnClasses = clsx('overflow-y-scroll', 'h-48')
@@ -44,7 +44,7 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
 
       onSelect(newDate)
     },
-    [onSelect]
+    [onSelect],
   )
 
   const hourRef = useRef<HTMLDivElement[]>([])
@@ -71,7 +71,7 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
     <div
       class={clsx(
         'bg-white dark:bg-info-800 dark:border-info-700 border rounded-md',
-        'grid grid-cols-2 gap-2'
+        'grid grid-cols-2 gap-2',
       )}
     >
       <div class={columnClasses}>

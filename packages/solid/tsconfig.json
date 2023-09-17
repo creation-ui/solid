@@ -1,13 +1,7 @@
 {
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "compilerOptions": {
-    "lib": [
-      "ES2021",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
     "incremental": false,
     "isolatedModules": true,
     "allowJs": true,
@@ -26,12 +20,10 @@
     "declarationMap": true,
     "jsxImportSource": "solid-js",
     "baseUrl": ".",
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@creation-ui/core/*": ["../../../creation-ui-react/packages/core/src/*"],
-      "@creation-ui/core": ["../../../creation-ui-react/packages/core/src"],
+      "@creation-ui/core": ["../../../creation-ui-react/packages/core/src"]
     }
   },
   "exclude": [

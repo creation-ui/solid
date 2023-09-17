@@ -26,7 +26,7 @@ export const Buggy = ({ value, className }: BuggyProps) => (
             'shadow-xl',
             'max-h-1/2',
           ],
-          className
+          className,
         )}
       >
         <h4 class='leading-relaxed text-xl font-semibold'>Debug</h4>

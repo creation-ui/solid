@@ -9,8 +9,8 @@ export const CalendarMonthsView = () => {
 
   const monthNames = Array.from({ length: 12 }, (_, i) =>
     new Intl.DateTimeFormat(effectiveLocale, { month: 'short' }).format(
-      new Date(2000, i)
-    )
+      new Date(2000, i),
+    ),
   )
 
   const handleMonthClick = (monthIndex: number) => {
@@ -37,7 +37,7 @@ export const CalendarMonthsView = () => {
     rows.push(
       <div key={i} class='flex justify-between mb-2'>
         {months.slice(i, i + 4)}
-      </div>
+      </div>,
     )
   }
 

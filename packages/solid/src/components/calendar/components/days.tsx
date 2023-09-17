@@ -20,8 +20,8 @@ export const CalendarDaysView = () => {
 
   const dayNames = Array.from({ length: 7 }, (_, i) =>
     new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(
-      new Date(firstDayOfWeek.setDate(firstDayOfWeek.getDate() + 1))
-    )
+      new Date(firstDayOfWeek.setDate(firstDayOfWeek.getDate() + 1)),
+    ),
   )
 
   const month = currentDate.getMonth()
@@ -32,12 +32,12 @@ export const CalendarDaysView = () => {
 
   const startDate = new Date(
     monthStart.setDate(
-      monthStart.getDate() - ((7 + monthStart.getDay() - weekStartsOn) % 7)
-    )
+      monthStart.getDate() - ((7 + monthStart.getDay() - weekStartsOn) % 7),
+    ),
   )
 
   const endDate = new Date(
-    monthEnd.setDate(monthEnd.getDate() + (6 - monthEnd.getDay()))
+    monthEnd.setDate(monthEnd.getDate() + (6 - monthEnd.getDay())),
   )
 
   const handleRowClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -100,7 +100,7 @@ export const CalendarDaysView = () => {
           data-date={cellDate}
         >
           {date.getDate().toString()}
-        </Button>
+        </Button>,
       )
 
       date.setDate(date.getDate() + 1)
@@ -109,7 +109,7 @@ export const CalendarDaysView = () => {
     rows.push(
       <div key={`week-${date.toString()}`} class='flex justify-between'>
         {days}
-      </div>
+      </div>,
     )
   }
 

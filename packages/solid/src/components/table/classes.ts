@@ -19,7 +19,7 @@ export const sortIconClasses = cva(
         false: [],
       },
     },
-  }
+  },
 )
 
 export const paginationClasses = cva(
@@ -49,7 +49,7 @@ export const paginationClasses = cva(
       },
       disabled: sharedDisabledCVA,
     },
-  }
+  },
 )
 
 export const sharedTableClasses = {
@@ -76,7 +76,7 @@ export const headerClasses = twMerge(
   'sticky',
   'top-0',
   'pt-6',
-  'pb-3'
+  'pb-3',
 )
 
 export const headerRowClasses = twMerge([rowGridClasses, 'align-middle'])
@@ -85,7 +85,7 @@ export const footerClasses = twMerge(
   sharedTableClasses.frame,
   sharedTableClasses.fullwidth,
   'sticky',
-  'bottom-0'
+  'bottom-0',
 )
 
 export const bodyClasses = cva([

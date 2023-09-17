@@ -14,7 +14,7 @@ const Row = ({ row }: RowCellProps) => {
     <tr
       class={clsx(
         'hover:bg-gray-100 dark:hover:bg-gray-800 w-full',
-        rowGridClasses
+        rowGridClasses,
       )}
     >
       {cells.map(cell => (

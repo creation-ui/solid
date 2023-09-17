@@ -158,5 +158,5 @@ export const chipClasses = cva(
         ],
       },
     ],
-  }
+  },
 )
