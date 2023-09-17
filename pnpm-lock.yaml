@@ -7,6 +7,7 @@ specifiers:
   '@types/node': ^20.6.1
   autoprefixer: ^10.4.15
   postcss: ^8.4.28
+  prettier: ^3.0.3
   solid-js: ^1.7.11
   solid-start: ^0.3.5
   solid-start-node: ^0.3.5
@@ -22,6 +23,7 @@ dependencies:
   '@solidjs/meta': 0.28.6_solid-js@1.7.11
   '@solidjs/router': 0.8.3_solid-js@1.7.11
   '@types/node': 20.6.1
+  prettier: 3.0.3
   solid-js: 1.7.11
   solid-start: 0.3.5_cirloxsjgda2prep77bcgwjwne
   tailwind-merge: 1.14.0
@@ -3057,6 +3059,12 @@ packages:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /prettier/3.0.3:
+    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: false
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
