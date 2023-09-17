@@ -1,14 +1,21 @@
-import { withTailwindConfig } from '@creation-ui/core'
+const { withTailwindConfig } = require('@creation-ui/core')
 
 /** @type {import('tailwindcss').Config} */
-module.exports = withTailwindConfig({
+const config = withTailwindConfig({
   content: [
-    './packages/solid/**/*.{html,js,jsx,ts,tsx}',
-    './src/**/*.{html,js,jsx,ts,tsx}',
-    './src/**/*.css',
+    //
+    './packages/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    '!node_modules',
+    './**/*.css',
   ],
-  theme: {
-    extend: {},
+  extend: {
+    transitionDelay: {
+      0: '0ms',
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 })
+
+module.exports = config
