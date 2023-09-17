@@ -25,7 +25,9 @@
       "@models/*": ["./models/*"],
       "@models": ["./models"],
       "@root/*": ["./*"],
-      "@root": ["./"]
+      "@root": ["./"],
+      "@src/*": ["./src/*"],
+      "@src": ["./src"]
     }
   }
 }

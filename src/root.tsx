@@ -1,5 +1,5 @@
 // @refresh reload
-import { Suspense } from 'solid-js'
+import { Show, Suspense } from 'solid-js'
 import {
   useLocation,
   A,
@@ -15,13 +15,12 @@ import {
 } from 'solid-start'
 import './root.css'
 import { Theme } from '@creation-ui/solid/theme'
+import { RoutesMenu } from '@components/RoutesMenu'
+import { routes } from './routes'
 
 export default function Root() {
   const location = useLocation()
-  const active = (path: string) =>
-    path == location.pathname
-      ? 'border-sky-600'
-      : 'border-transparent hover:border-sky-600'
+  const isIndex = location.pathname == '/'
 
   return (
     <Html lang='en'>
@@ -34,19 +33,35 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <Theme>
-              <nav class='bg-sky-800'>
-                <ul class='container flex items-center p-3 text-gray-200'>
-                  <li class={`border-b-2 ${active('/')} mx-1.5 sm:mx-6`}>
-                    <A href='/'>Home</A>
-                  </li>
-                  <li class={`border-b-2 ${active('/about')} mx-1.5 sm:mx-6`}>
-                    <A href='/about'>About</A>
-                  </li>
-                </ul>
-              </nav>
-              <Routes>
-                <FileRoutes />
-              </Routes>
+              <div class='w-screen h-screen relative overflow-y-auto'>
+                <nav class='fixed w-full  backdrop-blur-sm bg-white/10 z-10 top-0 left-0 flex justify-between items-center py-3 px-5 border-b border-info-200 font-light text-sm'>
+                  <div>Creation UI</div>
+                  <div class='flex items-center gap-3'>
+                    <div class={'hover:text-info-500'}>
+                      <A href='/docs'>Documentation</A>
+                    </div>
+                    <input
+                      placeholder='Search documentation...'
+                      class='border rounded-md p-1 bg-info-300 min-w-fit placeholder:text-info-100'
+                    />
+                    <div>GitHub</div>
+                  </div>
+                </nav>
+
+                <main class='grid grid-cols-3 gap-10 mt-20 prose min-w-full'>
+                  <Show when={!isIndex}>
+                    <RoutesMenu routes={routes} />
+                  </Show>
+                  <div class='mx-auto max-w-6xl'>
+                    <Routes>
+                      <FileRoutes />
+                    </Routes>
+                  </div>
+                  <Show when={!isIndex}>
+                    <div>On this page</div>
+                  </Show>
+                </main>
+              </div>
             </Theme>
           </ErrorBoundary>
         </Suspense>
