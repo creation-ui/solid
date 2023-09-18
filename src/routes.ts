@@ -3,6 +3,7 @@ export interface Route {
   title: string
   hide?: boolean
   children?: Route[]
+  completed?: boolean
 }
 
 export const routes: Route[] = [
@@ -30,21 +31,22 @@ export const routes: Route[] = [
       },
       { title: 'Avatar', path: '/avatar' },
       { title: 'Breadcrumbs', path: '/breadcrumbs' },
-      { title: 'Button', path: '/button' },
+      { title: 'Button', path: '/button', completed: true },
       { title: 'Button Group', path: '/button-group' },
       { title: 'Calendar', path: '/calendar' },
       { title: 'Callout', path: '/callout' },
       { title: 'Card', path: '/card' },
       { title: 'Checkbox', path: '/checkbox' },
       { title: 'Clear Button', path: '/clear-button' },
+      { title: 'Chip', path: '/chip', completed: true },
       { title: 'Dark Mode Toggle', path: '/dark-mode-toggle' },
       { title: 'Date Picker', path: '/date-picker' },
       { title: 'Drawer', path: '/drawer' },
       { title: 'Dropdown Chevron', path: '/dropdown-chevron' },
-      { title: 'Input', path: '/input' },
-      { title: 'Input Base', path: '/input-base' },
-      { title: 'Loader', path: '/loader' },
-      { title: 'Loading Overlay', path: '/loading-overlay' },
+      { title: 'Input', path: '/input', completed: true },
+      { title: 'Input Base', path: '/input-base', completed: true },
+      { title: 'Loader', path: '/loader', completed: true },
+      { title: 'Loading Overlay', path: '/loading-overlay', completed: true },
       { title: 'Modal', path: '/modal' },
       { title: 'Popover', path: '/popover' },
       { title: 'Progress Bar', path: '/progress-bar' },
@@ -66,7 +68,7 @@ export const routes: Route[] = [
       { title: 'Time Picker', path: '/time-picker' },
       { title: 'Toggle Group', path: '/toggle-group' },
       { title: 'Tooltip', path: '/tooltip' },
-      { title: 'Typography', path: '/typography' },
+      { title: 'Typography', path: '/typography', completed: true },
     ],
   },
 ]

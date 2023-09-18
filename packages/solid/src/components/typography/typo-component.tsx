@@ -7,13 +7,13 @@ import {
 import { cva } from 'class-variance-authority'
 import merge from 'lodash.merge'
 import values from 'lodash.values'
-import { splitProps } from 'solid-js'
 import { JSX } from 'solid-js/jsx-runtime'
-import { useTheme } from '../../theme'
 import { twMerge } from 'tailwind-merge'
+import { useTheme } from '../../theme'
 import { getElementType } from './get-element-type'
+import { Dynamic } from 'solid-js/web'
 
-interface GetDetailsArgs {
+interface TypographyProps {
   as?: IntrinsicElements
   class?: ClassName
   variant: ElementTypography
@@ -21,33 +21,31 @@ interface GetDetailsArgs {
   config?: Partial<TypographyConfig>
 }
 
-const UI_PROPS_KEYS: readonly (keyof GetDetailsArgs)[] = [
-  'variant',
-  'class',
-  'config',
-  'as',
-  'children',
-]
+export interface TypographyComponentProps
+  extends Omit<TypographyProps, 'variant'> {}
 
-export const TypoComponent = (props: GetDetailsArgs) => {
+export const Typography = (props: TypographyProps) => {
   const { typography } = useTheme()
-  const [{ variant, class: className, config, as, children }] = splitProps(
-    props,
-    UI_PROPS_KEYS
-  )
 
-  const mergedConfig = merge(typography?.[variant], config?.[variant])
+  const mergedConfig = merge(
+    typography?.[props.variant],
+    props.config?.[props.variant]
+  )
   const { fontSize, ...textClasses } = mergedConfig
 
   const classesValues = values(textClasses)
 
-  const classes = cva(twMerge(classesValues, className), {
+  const classes = cva(twMerge(classesValues, props.class), {
     variants: {
       size: fontSize,
     },
   })
 
-  const Component = as ?? getElementType(variant)
+  const component = props.as ?? getElementType(props.variant)
 
-  return <span class={classes()}>{children}</span>
+  return (
+    <Dynamic component={component} class={classes()}>
+      {props.children}
+    </Dynamic>
+  )
 }

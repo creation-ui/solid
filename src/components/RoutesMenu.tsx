@@ -1,4 +1,5 @@
 import { Route } from '@src/routes'
+import clsx from 'clsx'
 import { For } from 'solid-js'
 import { A } from 'solid-start'
 
@@ -10,15 +11,20 @@ interface RouteProps {
 export const RoutesMenu = ({ routes, parentPath = '' }: RouteProps) => (
   <ul class='font-light  text-sm !no-underline'>
     <For each={routes}>
-      {({ title, path, children }) => (
+      {route => (
         <li class='list-none mb-2'>
           <A
-            href={parentPath + path}
-            class='text-info-500 hover:text-info-800 no-underline py-2 px-3 rounded-md hover:bg-info-200/50 bg-transparent transition-all duration-500 ease-in-out transform'
+            href={parentPath + route.path}
+            class={clsx(
+              route.completed && 'bg-success-200/50 hover:bg-success-200/75',
+              'text-info-500 hover:text-info-800 no-underline py-1 px-3 rounded-md hover:bg-info-200/50 bg-transparent transition-all duration-500 ease-in-out transform',
+            )}
           >
-            {title}
+            {route.title}
           </A>
-          {children && <RoutesMenu routes={children} parentPath={path} />}
+          {route.children && (
+            <RoutesMenu routes={route.children} parentPath={route.path} />
+          )}
         </li>
       )}
     </For>

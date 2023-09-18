@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react'
+import { JSXNode } from '@creation-ui/core'
 
 export interface OverlayProps {
   active?: boolean
   onClick?: () => void
-  className?: string
+  class?: string
   cursorWait?: boolean
-  children?: ReactNode
+  children?: JSXNode
 }

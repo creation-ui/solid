@@ -2,29 +2,22 @@ import { twMerge } from 'tailwind-merge'
 import { useTheme } from '../../theme'
 import { overlay } from './classes'
 import type { OverlayProps } from './overlay.types'
+import { ParentComponent, splitProps } from 'solid-js'
 
-export const Overlay = ({
-  active,
-  onClick,
-  className,
-  cursorWait,
-  children,
-}: OverlayProps) => {
+export const Overlay: ParentComponent<OverlayProps> = props => {
   const { zIndex } = useTheme()
+  const [{ class: className }] = splitProps(props, ['class'])
 
   return (
     <div
       class={twMerge(
-        overlay({
-          visible: active,
-          cursorWait,
-        }),
+        overlay({ visible: props.active, cursorWait: props.cursorWait }),
         zIndex?.overlays,
-        className,
+        className
       )}
-      onClick={onClick}
+      onClick={props.onClick}
     >
-      {children}
+      {props.children}
     </div>
   )
 }
