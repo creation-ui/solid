@@ -1,8 +1,8 @@
-import { ReactNode } from 'react'
 import type {
   BaseComponentProps,
   ElementBaseVariant,
   ElementStatus,
+  JSXNode,
 } from '@creation-ui/core'
 
 export interface ChipProps
@@ -26,7 +26,7 @@ export interface ChipProps
   /**
    * Start adornment
    */
-  startAdornment?: ReactNode
+  startAdornment?: JSXNode
   /**
    * Callback when delete button is clicked
    */

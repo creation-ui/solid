@@ -2,24 +2,32 @@ import { useTheme } from '../../theme'
 import { ClearButton } from '../clear-button'
 import { chipClasses } from './classes'
 import type { ChipProps } from './chip.types'
+import { Component, splitProps } from 'solid-js'
 
-export const Chip = (props: ChipProps) => {
-  const {
-    //
-    size: defaultSize,
-  } = useTheme()
+export const Chip: Component<ChipProps> = props => {
+  const { size: defaultSize } = useTheme()
 
-  const {
-    //
-    label,
-    status,
-    size = defaultSize,
-    variant,
-    onDelete,
-    onClick,
-    startAdornment = null,
-    uppercase,
-  } = props
+  const [
+    {
+      label,
+      onClick,
+      onDelete,
+      size = defaultSize,
+      startAdornment = null,
+      status,
+      uppercase,
+      variant,
+    },
+  ] = splitProps(props, [
+    'label',
+    'onClick',
+    'onDelete',
+    'size',
+    'startAdornment',
+    'status',
+    'uppercase',
+    'variant',
+  ])
 
   return (
     <div
@@ -44,5 +52,3 @@ export const Chip = (props: ChipProps) => {
     </div>
   )
 }
-
-Chip.displayName = 'StatusBadge'

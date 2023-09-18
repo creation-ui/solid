@@ -22,6 +22,10 @@ export const routes: Route[] = [
         path: '/input',
         title: 'Input',
       },
+      {
+        path: '/chip',
+        title: 'Chip',
+      },
     ],
   },
 ]
