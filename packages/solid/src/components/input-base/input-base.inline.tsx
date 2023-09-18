@@ -19,60 +19,32 @@ interface InputProps extends InputBaseProps {
   ref?: any
 }
 
-const UI_PROPS_KEYS: readonly (keyof InputProps)[] = [
-  'loading',
-  'helperText',
-  'error',
-  'size',
-  'type',
-  'cx',
-  'id',
-  'children',
-  'startAdornment',
-  'endAdornment',
-  'clearable',
-  'variant',
-  'layout',
-  'interactionsDisabled',
-  'onClear',
-  'ref',
-]
+const UI_PROPS_KEYS: readonly (keyof InputProps)[] = ['type', 'size', 'layout']
 
 const InputBaseInline: ParentComponent<InputProps> = props => {
   const { size: defaultSize } = useTheme()
-  const [
-    {
-      loading,
-      helperText,
-      error,
-      size = defaultSize,
-      type = 'text',
-      cx,
-      id,
-      children,
-      variant,
-      layout = 'row',
-      // onClear,
-    },
-  ] = splitProps(props, UI_PROPS_KEYS)
-  const componentId = useId(id)
+  const [{ size = defaultSize, type = 'text', layout = 'row' }] = splitProps(
+    props,
+    UI_PROPS_KEYS
+  )
+  const componentId = useId(props.id)
 
   const disabled = props.disabled
-  const readOnly = props.readOnly || loading
+  const readOnly = props.readOnly || props.loading
 
   const outerContainerClasses = twMerge(
-    inputContainer({ disabled, error: !!error, layout }),
+    inputContainer({ disabled, error: props.error, layout }),
     text({ size }),
-    cx?.container?.inner
+    props.cx?.container?.inner
   )
 
   const inputClasses = twMerge(
     inputClassesCVA({
       size,
-      variant,
+      variant: props.variant,
       // @ts-ignore
       className: cx?.input,
-      error: !!error,
+      error: props.error,
     })
   )
 
@@ -87,31 +59,31 @@ const InputBaseInline: ParentComponent<InputProps> = props => {
           },
           disabled,
           readOnly,
-          error: !!error,
+          error: props.error,
           type,
         }}
       >
-        <div class={cx?.container?.outer}>
+        <div class={props.cx?.container?.outer}>
           <div class={outerContainerClasses}>
-            {children}
+            {props.children}
             <label
               for={componentId}
               class={label({
                 size,
                 required: props.required,
-                className: cx?.label,
+                className: props.cx?.label,
               })}
               children={props.label}
               aria-label={props.label?.toString()}
             />
-            {loading && <Loader size={size === 'lg' ? 'md' : 'sm'} />}
+            {props.loading && <Loader size={size === 'lg' ? 'md' : 'sm'} />}
           </div>
           <Description
             size={size}
-            error={!!error}
-            class={error ? errorClasses.text : ''}
+            error={props.error}
+            class={props.error ? errorClasses.text : ''}
           >
-            {error || helperText}
+            {props.error || props.helperText}
           </Description>
         </div>
       </InputBaseProvider>

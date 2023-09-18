@@ -4,13 +4,13 @@ import { JSX, ParentComponent, createContext, useContext } from 'solid-js'
 interface InputBaseContextValue {
   componentId: string
   type: HTMLInputType
+  disabled?: boolean
+  readOnly?: boolean
+  error?: boolean
   classes: {
     input: string
     container: string
   }
-  disabled?: boolean
-  readOnly?: boolean
-  error?: boolean
 }
 
 export const InputBaseContext = createContext<InputBaseContextValue>()

@@ -25,64 +25,33 @@ interface InputProps extends InputBaseProps {
   ref?: any
 }
 
-const UI_PROPS_KEYS: readonly (keyof InputProps)[] = [
-  'loading',
-  'helperText',
-  'error',
-  'size',
-  'type',
-  'cx',
-  'id',
-  'children',
-  'startAdornment',
-  'endAdornment',
-  'clearable',
-  'variant',
-  'layout',
-  'interactionsDisabled',
-  'onClear',
-  'ref',
-]
-
 const InputBase: ParentComponent<InputProps> = props => {
   const { size: defaultSize, variant: defaultVariant = 'outlined' } = useTheme()
   const [
     {
-      loading,
-      helperText,
-      error,
       size = defaultSize,
-      type = 'text',
-      cx,
-      id,
-      children,
-      startAdornment,
-      endAdornment,
-      clearable,
       variant = defaultVariant,
+      type = 'text',
       layout = 'column',
-      interactionsDisabled,
-      ref,
-      onClear,
     },
-  ] = splitProps(props, UI_PROPS_KEYS)
+  ] = splitProps(props, ['size', 'type', 'variant', 'layout'])
 
-  const componentId = useId(id)
+  const componentId = useId(props.id)
 
   const disabled = props.disabled
-  const readOnly = props.readOnly || loading
-  const disableInteractions = disabled || readOnly || loading
+  const readOnly = props.readOnly || props.loading
+  const disableInteractions = disabled || readOnly || props.loading
 
   const outerContainerClasses = twMerge(
-    inputContainer({ disabled, error: !!error, layout }),
+    inputContainer({ disabled, error: props.error, layout }),
     text({ size }),
-    cx?.container?.outer
+    props.cx?.container?.outer
   )
 
   const isUnstyled = UNSTYLED_TYPES.includes(type)
-  const hasError = Boolean(error)
-  const hasStartAdornment = Boolean(startAdornment)
-  const hasEndAdornment = Boolean(endAdornment)
+  const hasError = Boolean(props.error)
+  const hasStartAdornment = Boolean(props.startAdornment)
+  const hasEndAdornment = Boolean(props.endAdornment)
   const finalVariant = isUnstyled ? 'unstyled' : variant
 
   const inputClasses = twMerge(
@@ -91,10 +60,10 @@ const InputBase: ParentComponent<InputProps> = props => {
       variant: finalVariant,
       startAdornment: hasStartAdornment,
       endAdornment: hasEndAdornment,
-      clearable,
+      clearable: props.clearable,
       error: hasError,
-      interactionsDisabled,
-      className: cx?.input,
+      interactionsDisabled: props.interactionsDisabled,
+      className: props.cx?.input,
       // @ts-expect-error
       type,
     })
@@ -106,7 +75,7 @@ const InputBase: ParentComponent<InputProps> = props => {
         classes: { input: inputClasses, container: outerContainerClasses },
         disabled,
         readOnly,
-        error: !!error,
+        error: props.error,
         type,
       }}
     >
@@ -117,15 +86,19 @@ const InputBase: ParentComponent<InputProps> = props => {
             class={label({
               size,
               required: props.required,
-              className: cx?.label,
+              className: props.cx?.label,
             })}
             children={props.label}
             aria-label={props.label?.toString()}
           />
-          <InputBaseContainerInner class={cx?.container?.inner} ref={ref}>
-            <Adornment position='left' type={type} adornment={startAdornment} />
-            {children}
-            {loading ? (
+          <InputBaseContainerInner class={props.cx?.container?.inner}>
+            <Adornment
+              position='left'
+              type={type}
+              adornment={props.startAdornment}
+            />
+            {props.children}
+            {props.loading ? (
               <Loader
                 class={inputIcon({
                   position: 'right',
@@ -140,10 +113,10 @@ const InputBase: ParentComponent<InputProps> = props => {
                 type={type}
                 adornment={
                   <>
-                    {clearable && !disableInteractions && (
-                      <ClearButton onClick={onClear} />
+                    {props.clearable && !disableInteractions && (
+                      <ClearButton onClick={props.onClear} />
                     )}
-                    {endAdornment}
+                    {props.endAdornment}
                   </>
                 }
               />
@@ -154,7 +127,7 @@ const InputBase: ParentComponent<InputProps> = props => {
             error={hasError}
             class={clsx(hasError && errorClasses.text)}
           >
-            {error || helperText}
+            {props.error || props.helperText}
           </Description>
         </div>
       </InteractiveContainer>
