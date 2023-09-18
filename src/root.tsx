@@ -21,11 +21,16 @@ import { routes } from './routes'
 export default function Root() {
   const location = useLocation()
   const isIndex = location.pathname == '/'
+  const path = location.pathname.split('/').pop()
+
+  const currentRoute = routes.find(route => route.path == `/${path}`)
+
+  const title = currentRoute ? `${currentRoute?.title} | CUI` : 'Creation UI'
 
   return (
     <Html lang='en'>
       <Head>
-        <Title>Creation UI | Solid.js</Title>
+        <Title>{title}</Title>
         <Meta charset='utf-8' />
         <Meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
