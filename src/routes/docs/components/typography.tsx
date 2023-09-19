@@ -1,4 +1,4 @@
-import { TypographyExample } from '@root/src/examples/typography.example'
+import { TypographyExample } from '@root/src/docs/examples/typography.example'
 
 export default function LoaderPage() {
   return (

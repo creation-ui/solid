@@ -1,13 +1,19 @@
 import type { ThemeProps, ThemeProviderProps } from '@creation-ui/core'
 import { defaultTheme } from '@creation-ui/core'
-import { createContext, useContext } from 'solid-js'
+import {
+  ParentComponent,
+  createContext,
+  mergeProps,
+  useContext,
+} from 'solid-js'
 
 const ThemeCtx = createContext<Partial<ThemeProps>>()
 
-export const Theme: (props: ThemeProviderProps) => JSX.Element = props => {
-  const mergedTheme = { ...defaultTheme, ...props.theme }
+export const Theme: ParentComponent<ThemeProviderProps> = props => {
   return (
-    <ThemeCtx.Provider value={mergedTheme}>{props.children}</ThemeCtx.Provider>
+    <ThemeCtx.Provider value={mergeProps(defaultTheme, props.theme)}>
+      {props.children}
+    </ThemeCtx.Provider>
   )
 }
 

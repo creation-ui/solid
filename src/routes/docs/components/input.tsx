@@ -1,4 +1,4 @@
-import { InputExamples } from '@root/src/examples/input.example'
+import { InputExamples } from '@root/src/docs/examples/input.example'
 
 export default function InputDocsPage() {
   return (

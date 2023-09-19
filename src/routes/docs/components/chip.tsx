@@ -1,4 +1,4 @@
-import { ChipExamplesPage } from '@root/src/examples/chip.example'
+import { ChipExamplesPage } from '@root/src/docs/examples/chip.example'
 
 export default function ChipDocsPage() {
   return (
