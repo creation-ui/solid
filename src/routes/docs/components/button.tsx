@@ -1,4 +1,4 @@
-import { ButtonPlayground } from '@root/src/docs/examples/button.example'
+import { ButtonPlayground } from '@docs/examples/button.example'
 
 export default function ButtonDocsPage() {
   return (
