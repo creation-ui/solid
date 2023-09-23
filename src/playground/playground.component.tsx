@@ -11,7 +11,7 @@ interface PlaygroundComponentProps {
 export const PlaygroundComponent: ParentComponent<
   PlaygroundComponentProps
 > = () => {
-  const { componentProps, component, state } = usePlayground()
+  const [{ component, componentProps, state }] = usePlayground()
   return (
     <div class={clsx(classes.view)}>
       <Dynamic component={component} {...componentProps} {...state} />

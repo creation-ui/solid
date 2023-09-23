@@ -1,11 +1,12 @@
+import { Component, splitProps } from 'solid-js'
 import { useTheme } from '../../theme'
 import { InputBaseInline } from '../input-base'
 import type { SwitchProps } from './switch.types'
 import { SwitchView } from './switch.view'
 
-const Switch = (props: SwitchProps) => {
+const Switch: Component<SwitchProps> = props => {
   const { size: defaultSize } = useTheme()
-  const { size = defaultSize, ...rest } = props
+  const [{ size = defaultSize }, rest] = splitProps(props, ['size'])
 
   return (
     <InputBaseInline {...rest} size={size} layout='row'>
@@ -13,6 +14,5 @@ const Switch = (props: SwitchProps) => {
     </InputBaseInline>
   )
 }
-Switch.displayName = '_Switch'
 
 export default Switch

@@ -6,13 +6,14 @@ import {
 } from '@creation-ui/core'
 
 export const toggleGroup = {
-  container: [
-    microInteractions,
-    'relative',
-    'inline-flex',
-    'shadow-sm',
-    'rounded-md',
-  ],
+  container: cva(
+    [microInteractions, 'relative', 'inline-flex', 'shadow-sm', 'rounded-md'],
+    {
+      variants: {
+        disabled: sharedDisabledCVA,
+      },
+    }
+  ),
   button: cva(
     [
       microInteractions,
@@ -57,6 +58,6 @@ export const toggleGroup = {
         disabled: sharedDisabledCVA,
         size: sharedSizeClassesCVA,
       },
-    },
+    }
   ),
 }

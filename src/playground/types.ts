@@ -1,4 +1,5 @@
-import type { FC } from 'react'
+import { JSX } from 'solid-js'
+import { SetStoreFunction } from 'solid-js/store'
 
 export type PlaygroundValueType =
   | 'string'
@@ -28,7 +29,7 @@ export type PlaygroundControl = {
 
 export interface PlaygroundControllerProps {
   name: string
-  component: FC<any>
+  component: JSX.Element
   controls: PlaygroundControl[]
   showCode?: boolean
   componentProps?: any
@@ -38,7 +39,16 @@ export interface PlaygroundState {
   [key: string]: PlaygroundValues
 }
 
-export interface PlaygroundContextValue extends PlaygroundControllerProps {
-  state: PlaygroundState
-  handleChange: (name: string, value: PlaygroundValues) => void
-}
+// export interface PlaygroundContextValue extends PlaygroundControllerProps {
+//   state: PlaygroundState
+//   handleChange: (name: string, value: PlaygroundValues) => void
+// }
+
+export type PlaygroundContextValue = [
+  {
+    state: PlaygroundState
+  } & PlaygroundControllerProps,
+  {
+    handleChange: SetStoreFunction<PlaygroundState>
+  },
+]

@@ -1,37 +1,36 @@
 import {
-  //
   Input,
-  // Switch,
-  // ToggleGroup,
+  Switch,
+  ToggleGroup,
 } from '@creation-ui/solid'
-
+import { capitalize } from '@creation-ui/core'
 import clsx from 'clsx'
 import get from 'lodash.get'
+import { Component, For } from 'solid-js'
 import { classes } from './classes'
 import { ColorsSelector } from './components/colors-selector'
 import { DEFAULT_CONTROLS } from './constants'
 import { usePlayground } from './context/context'
 import { PlaygroundControl } from './types'
-import { Component, For } from 'solid-js'
-import { capitalize } from '@creation-ui/core'
 
 interface PlaygroundControlProps {
   property: PlaygroundControl
   parentKey?: string
 }
 
-export const PlaygroundControlComponent: Component<PlaygroundControlProps> = ({
-  property,
-  parentKey,
-}) => {
-  const { state, handleChange } = usePlayground()
-  const { name: n, type, values, component: controls, helperText } = property
+export const PlaygroundControlComponent: Component<
+  PlaygroundControlProps
+> = props => {
+  const [{ state }, { handleChange }] = usePlayground()
 
-  const name = parentKey ? `${parentKey}.${n}` : n
+  const name = props.parentKey
+    ? `${props.parentKey}.${props.property.name}`
+    : props.property.name
 
-  const label = property.label ?? capitalize(name)
+  const label = props.property.label ?? capitalize(name)
 
-  const controlType = controls ?? DEFAULT_CONTROLS[type]
+  const controlType =
+    props.property.component ?? DEFAULT_CONTROLS[props.property.type]
 
   const handleInputChange = (e: any) => {
     handleChange(name, e.target.value)
@@ -42,8 +41,7 @@ export const PlaygroundControlComponent: Component<PlaygroundControlProps> = ({
   const onClear = () => handleChange(name, '')
 
   const value = get(state, name)
-
-  const arrayValue = values?.find(v => v.value === value)
+  const arrayValue = props.property.values?.find(v => v.value === value)
 
   switch (controlType) {
     case 'input:number':
@@ -53,7 +51,7 @@ export const PlaygroundControlComponent: Component<PlaygroundControlProps> = ({
           onChange={handleInputChange}
           label={label}
           type={'number'}
-          helperText={helperText}
+          helperText={props.property.helperText}
         />
       )
     case 'colors':
@@ -61,36 +59,36 @@ export const PlaygroundControlComponent: Component<PlaygroundControlProps> = ({
         <ColorsSelector
           label={label}
           value={arrayValue}
-          options={(values ?? []) as any}
+          options={(props.property.values ?? []) as any}
           onClick={handlePlainChange}
-          helperText={helperText}
+          helperText={props.property.helperText}
         />
       )
-    // case 'switch':
-    //   return (
-    //     <Switch
-    //       label={label}
-    //       checked={value as boolean}
-    //       onChange={handlePlainChange}
-    //       helperText={helperText}
-    //     />
-    //   )
-    // case 'toggle-group':
-    //   return 'ToggleGroup component not ported yet'
-    //   return (
-    //     <ToggleGroup
-    //       label={label}
-    //       options={(values ?? []) as any}
-    //       value={value as any}
-    //       onChange={handlePlainChange}
-    //       helperText={helperText}
-    //     />
-    //   )
+    case 'switch':
+      console.log('switch', value)
+      return (
+        <Switch
+          label={label}
+          checked={value as boolean}
+          onChange={handlePlainChange}
+          helperText={props.property.helperText}
+        />
+      )
+    case 'toggle-group':
+      return (
+        <ToggleGroup
+          label={label}
+          options={(props.property.values ?? []) as any}
+          value={value as any}
+          onChange={handlePlainChange}
+          helperText={props.property.helperText}
+        />
+      )
     case 'nested':
       return (
         <div class={clsx(classes.controls, '!pl-0', '!pt-0', '!border-none')}>
           <div class='font-semibold'>{label}</div>
-          <For each={property.controls}>
+          <For each={props.property.controls}>
             {childProperty => (
               <PlaygroundControlComponent
                 property={childProperty}
@@ -102,17 +100,17 @@ export const PlaygroundControlComponent: Component<PlaygroundControlProps> = ({
         </div>
       )
     case 'input:text':
-    // default:
-    return (
-      <Input
-      onChange={handleInputChange}
-      label={label}
-      type={'text'}
-      value={value as string}
-      onClear={onClear}
-      clearable={!!value}
-      helperText={helperText}
-      />
+      // default:
+      return (
+        <Input
+          onChange={handleInputChange}
+          label={label}
+          type={'text'}
+          value={value as string}
+          onClear={onClear}
+          clearable={!!value}
+          helperText={props.property.helperText}
+        />
       )
     default:
       return `Control type ${controlType} not supported yet`

@@ -43,7 +43,7 @@ const InputBaseInline: ParentComponent<InputProps> = props => {
       size,
       variant: props.variant,
       // @ts-ignore
-      className: cx?.input,
+      className: props.cx?.input,
       error: props.error,
     })
   )

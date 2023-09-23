@@ -1,11 +1,11 @@
 import clsx from 'clsx'
+import { For } from 'solid-js'
 import { classes } from './classes'
 import { usePlayground } from './context/context'
 import { PlaygroundControlComponent } from './playground-control'
-import { For } from 'solid-js'
 
 export const PlaygroundControls = () => {
-  const { controls } = usePlayground()
+  const [{ controls }] = usePlayground()
 
   return (
     <div class={clsx(classes.controls)}>

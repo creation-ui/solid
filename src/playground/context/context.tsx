@@ -1,9 +1,7 @@
-import { ParentComponent, createContext, useContext } from 'solid-js'
+import { createContext, useContext } from 'solid-js'
 import { PlaygroundContextValue } from '../types'
 
-export const PlaygroundContext = createContext<PlaygroundContextValue>(
-  {} as any,
-)
+export const PlaygroundContext = createContext<PlaygroundContextValue>()
 
 export const usePlayground = () => {
   const context = useContext(PlaygroundContext)
@@ -14,16 +12,3 @@ export const usePlayground = () => {
 
   return context
 }
-
-interface PlaygroundProviderProps {
-  value: PlaygroundContextValue
-  children: JSX.Element
-}
-
-export const PlaygroundProvider: ParentComponent<
-  PlaygroundProviderProps
-> = props => (
-  <PlaygroundContext.Provider value={props.value}>
-    {props.children}
-  </PlaygroundContext.Provider>
-)

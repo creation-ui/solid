@@ -8,10 +8,12 @@ import { getComponentCode } from './utils/get-component-code'
 import { objectToPropsText } from './utils/object-to-props-text'
 
 export const PlaygroundCode: Component<{ visible: boolean }> = props => {
-  const {
-    state: { children, ...state },
-    name,
-  } = usePlayground()
+  const [
+    {
+      state: { children, ...state },
+      name,
+    },
+  ] = usePlayground()
 
   if (!props.visible) return null
 

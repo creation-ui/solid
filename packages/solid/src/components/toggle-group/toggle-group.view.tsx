@@ -1,46 +1,44 @@
-import { RadioGroup } from '@headlessui/react'
-import { twMerge } from 'tailwind-merge'
 import { getElementPosition } from '@creation-ui/core'
+import { Component, Index, splitProps } from 'solid-js'
 import { useInputBase } from '../input-base/input-base.context'
 import { toggleGroup } from './classes'
 import type { ToggleGroupOption, ToggleGroupProps } from './toggle-group.types'
 
-export const ToggleGroupView = ({
-  size,
-  className,
-  options,
-  ...rest
-}: ToggleGroupProps) => {
+export const ToggleGroupView: Component<ToggleGroupProps> = props => {
   const { componentId, readOnly, disabled } = useInputBase()
+  const [{ size, class: cs, options }, rest] = splitProps(props, [
+    'size',
+    'class',
+    'options',
+  ])
+
+  const isChecked = (value: any) => props.value === value
 
   return (
-    <RadioGroup
+    <div
       {...rest}
       id={componentId}
-      class={twMerge(toggleGroup.container, className)}
-      disabled={disabled || readOnly}
+      class={toggleGroup.container({
+        disabled: disabled || readOnly,
+        class: cs,
+      })}
     >
-      {options.map(
-        ({ label, value, disabled }: ToggleGroupOption, index, array) => (
-          <RadioGroup.Option
-            key={value}
-            value={value}
+      <Index each={options}>
+        {({ label, value, disabled }: ToggleGroupOption, idx) => (
+          <div
+            data-key={value}
             title={value}
-            disabled={disabled}
-            class={({ checked, disabled }) =>
-              toggleGroup.button({
-                checked,
-                // @ts-ignore
-                disabled,
-                size,
-                element: getElementPosition(array, index),
-              })
-            }
+            class={toggleGroup.button({
+              checked: isChecked(value),
+              disabled,
+              size,
+              element: getElementPosition(options, idx),
+            })}
           >
-            <RadioGroup.Label as='span'>{label}</RadioGroup.Label>
-          </RadioGroup.Option>
-        ),
-      )}
-    </RadioGroup>
+            <span>{label}</span>
+          </div>
+        )}
+      </Index>
+    </div>
   )
 }
