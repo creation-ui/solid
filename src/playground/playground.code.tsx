@@ -15,6 +15,7 @@ export const PlaygroundCode: Component<{ visible: boolean }> = props => {
   return (
     <Show when={props.visible}>
       <pre class={clsx(classes.code, 'rounded-tl-none rounded-tr-none')}>
+        {/* eslint-disable-next */}
         <code class='language-tsx ' innerHTML={html} />
       </pre>
     </Show>

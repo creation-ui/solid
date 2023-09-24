@@ -42,16 +42,13 @@ export const PlaygroundControlComponent: Component<
   const handleInputChange = (e: any) => handleChange(name, e.target.value)
   const handlePlainChange = (value: any) => handleChange(name, value)
 
-  const value = get(state, name)
-  const arrayValue = props.property.values?.find(v => v.value === value)
-
   const isType = (type: string) => type === controlType
 
   return (
     <SolidSwitch fallback={`Control type ${controlType} not supported yet`}>
       <Match when={isType('input:number')}>
         <Input
-          value={value as number}
+          value={get(state, name) as number}
           onChange={handleInputChange}
           label={label}
           type={'number'}
@@ -62,7 +59,7 @@ export const PlaygroundControlComponent: Component<
       <Match when={isType('colors')}>
         <ColorsSelector
           label={label}
-          value={arrayValue}
+          value={props.property.values?.find(v => v.value === get(state, name))}
           options={(props.property.values ?? []) as any}
           onClick={handlePlainChange}
           helperText={props.property.helperText}
@@ -71,7 +68,7 @@ export const PlaygroundControlComponent: Component<
       <Match when={isType('switch')}>
         <Switch
           label={label}
-          checked={value as boolean}
+          checked={get(state, name) as boolean}
           onChange={handlePlainChange}
           helperText={props.property.helperText}
         />
@@ -80,7 +77,7 @@ export const PlaygroundControlComponent: Component<
         <ToggleGroup
           label={label}
           options={(props.property.values ?? []) as any}
-          value={value as any}
+          value={get(state, name) as any}
           onChange={handlePlainChange}
           helperText={props.property.helperText}
         />
@@ -104,7 +101,7 @@ export const PlaygroundControlComponent: Component<
           onChange={handleInputChange}
           label={label}
           type={'text'}
-          value={value as string}
+          value={get(state, name) as string}
           onClear={onClear}
           clearable={!!value}
           helperText={props.property.helperText}

@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import devtools from 'solid-devtools/vite'
 
 export default defineConfig(({ mode }): any => {
+  // eslint-disable-next-line
   const env = loadEnv(mode, process.cwd(), '')
   const sourcemap = env.BUILD_SOURCEMAP ?? false
   const minify = env.BUILD_MINIFY ?? 'esbuild'
