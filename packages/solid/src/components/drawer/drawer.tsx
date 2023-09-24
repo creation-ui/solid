@@ -1,13 +1,14 @@
-import { Dialog, Transition } from '@headlessui/react'
+// import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { Fragment } from 'react'
 import { useTheme } from '../../theme'
 import { child, drawer, drawerAnimation } from './classes'
 import type { DrawerProps } from './drawer.types'
 import { Overlay } from '../overlay'
+import { splitProps } from 'solid-js'
 
-const Drawer = ({ open, children, onOverlayClick, ...props }: DrawerProps) => {
-  const { drawers, zIndex } = useTheme()
+const Drawer = (_props: DrawerProps) => {
+    const [props, rest] = splitProps(_props, ["open", "children", "onOverlayClick"]);
+const { drawers, zIndex } = useTheme()
   const {
     //
     position = drawers!.position,
@@ -16,9 +17,9 @@ const Drawer = ({ open, children, onOverlayClick, ...props }: DrawerProps) => {
 
   return (
     <>
-      <Overlay class={'fixed'} active={open} onClick={onOverlayClick} />
+      <Overlay class={'fixed'} active={props.open} onClick={props.onOverlayClick} />
       <Transition
-        show={open}
+        show={props.open}
         as={Fragment}
         unmount={false}
         enter={clsx(drawerAnimation.animation)}
@@ -35,7 +36,7 @@ const Drawer = ({ open, children, onOverlayClick, ...props }: DrawerProps) => {
           class={drawer({ className: [zIndex?.modals], position })}
         >
           <div class='h-full flex'>
-            <div class={clsx(child)}>{children}</div>
+            <div class={clsx(child)}>{props.children}</div>
           </div>
         </Dialog>
       </Transition>

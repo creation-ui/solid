@@ -15,7 +15,7 @@ export function Banner(): ReactElement | null {
 
   return (
     <>
-      <script dangerouslySetInnerHTML={{ __html: hideBannerScript }} />
+      <script innerHTML={hideBannerScript} />
       <div
         class={cn(
           'nextra-banner-container nx-sticky nx-top-0 nx-z-20 nx-flex nx-items-center md:nx-relative',

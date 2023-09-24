@@ -5,31 +5,22 @@ import type { ElementTheme } from '@creation-ui/core'
 import { darkModeToggleDefaultProperties } from './constants'
 import type { DarkModeToggleProps } from './dark-mode-toggle.type'
 import { isDarkThemeSet, updateDocumentClasses } from './utils'
+import { mergeProps, splitProps } from 'solid-js'
 
-export const DarkModeToggle = ({
-  onChange,
-  children,
-  checked = false,
-  size = 24,
-  animationProperties = darkModeToggleDefaultProperties,
-  moonColor = 'white',
-  sunColor = 'black',
-  style,
-  ...rest
-}: DarkModeToggleProps) => {
-  const [theme, setTheme, _clearLS] = useLocalStorage<ElementTheme>('theme')
+export const DarkModeToggle = (_props: DarkModeToggleProps) => {
+    const [props, rest] = splitProps(mergeProps({ checked: false, size: 24, animationProperties: darkModeToggleDefaultProperties, moonColor: 'white', sunColor: 'black' }, _props), ["onChange", "children", "checked", "size", "animationProperties", "moonColor", "sunColor", "style"]);const [theme, setTheme, _clearLS] = useLocalStorage<ElementTheme>('theme')
   const properties = useMemo(() => {
-    if (animationProperties !== darkModeToggleDefaultProperties) {
-      return Object.assign(darkModeToggleDefaultProperties, animationProperties)
+    if (props.animationProperties !== darkModeToggleDefaultProperties) {
+      return Object.assign(darkModeToggleDefaultProperties, props.animationProperties)
     }
-    return animationProperties
-  }, [animationProperties])
+    return props.animationProperties
+  }, [props.animationProperties])
 
   const isDarkTheme = theme === 'dark'
 
-  const { circle, svg, lines, mask } = properties[checked ? 'dark' : 'light']
+  const { circle, svg, lines, mask } = properties[props.checked ? 'dark' : 'light']
 
-  const { springConfig } = animationProperties
+  const { springConfig } = props.animationProperties
 
   const svgContainerProps = useSpring({ ...svg, config: springConfig })
   const centerCircleProps = useSpring({ ...circle, config: springConfig })
@@ -39,7 +30,7 @@ export const DarkModeToggle = ({
   const handleThemeChange = (theme: ElementTheme) => {
     updateDocumentClasses(theme)
     setTheme(theme)
-    onChange?.(isDarkTheme ? true : false)
+    props.onChange?.(isDarkTheme ? true : false)
   }
 
   const toggle = () => handleThemeChange(isDarkTheme ? 'light' : 'dark')
@@ -51,12 +42,12 @@ export const DarkModeToggle = ({
   }, [theme])
 
   const uniqueMaskId = `circle-mask-${theme}`
-  const color = isDarkTheme ? moonColor : sunColor
+  const color = isDarkTheme ? props.moonColor : props.sunColor
   return (
     <animated.svg
       xmlns='http://www.w3.org/2000/svg'
-      width={size}
-      height={size}
+      width={props.size}
+      height={props.size}
       viewBox='0 0 24 24'
       color={color}
       fill='none'
@@ -68,7 +59,7 @@ export const DarkModeToggle = ({
       style={{
         cursor: 'pointer',
         ...svgContainerProps,
-        ...style,
+        ...props.style,
       }}
       {...rest}
     >

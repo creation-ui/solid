@@ -18,21 +18,19 @@ const defaultAnimationProps: AnimationProps = {
   transition: { duration },
 }
 
-export const Show = ({
-  when,
-  children,
-  fallback = null,
-  animationProps = defaultAnimationProps,
-}: ShowProps) => (
-  <AnimatePresence>
-    {when ? (
-      <motion.div key='true' {...animationProps}>
-        {children}
+export const Show = (_props: ShowProps) => 
+  {
+  const props = mergeProps({ fallback: null, animationProps: defaultAnimationProps }, _props);
+  return (<AnimatePresence>
+    {props.when ? (
+      <motion.div key='true' {...props.animationProps}>
+        {props.children}
       </motion.div>
     ) : (
-      <motion.div key='false' {...animationProps}>
-        {fallback}
+      <motion.div key='false' {...props.animationProps}>
+        {props.fallback}
       </motion.div>
     )}
-  </AnimatePresence>
-)
+  </AnimatePresence>);
+}
+

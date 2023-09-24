@@ -1,10 +1,7 @@
 import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
 
-export function Bleed({
-  full,
-  children
-}: {
+export function Bleed(props: {
   full: boolean
   children: ReactNode
 }): ReactElement {
@@ -12,14 +9,14 @@ export function Bleed({
     <div
       class={cn(
         'nextra-bleed nx-relative -nx-mx-6 nx-mt-6 md:-nx-mx-8 2xl:-nx-mx-24',
-        full && [
+        props.full && [
           // 'md:mx:[calc(-50vw+50%+8rem)',
           'ltr:xl:nx-ml-[calc(50%-50vw+16rem)] ltr:xl:nx-mr-[calc(50%-50vw)]',
           'rtl:xl:nx-ml-[calc(50%-50vw)] rtl:xl:nx-mr-[calc(50%-50vw+16rem)]'
         ]
       )}
     >
-      {children}
+      {props.children}
     </div>
   )
 }

@@ -10,8 +10,8 @@ interface BreadcrumbItemProps {
 }
 
 export const BreadcrumbItem: FC<BreadcrumbItemProps> = memo(
-  ({ link: { href, label }, index, count, separator }) => {
-    const isLast = index === count - 1
+  (props) => {
+    const isLast = props.index === props.count - 1
 
     const props: React.HTMLProps<HTMLLIElement> = {
       ...(isLast && { 'aria-current': 'page' }),
@@ -19,7 +19,7 @@ export const BreadcrumbItem: FC<BreadcrumbItemProps> = memo(
 
     return (
       <>
-        {separator}
+        {props.separator}
         <li {...props}>
           <div class='flex items-center capitalize'>
             <a

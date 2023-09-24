@@ -1,4 +1,4 @@
-import { Component, splitProps } from 'solid-js'
+import { Component, mergeProps, splitProps } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { PlaygroundContext } from './context/context'
 import { PlaygroundCode } from './playground.code'
@@ -8,10 +8,10 @@ import { PlaygroundView } from './playground.view'
 import { PlaygroundControllerProps, PlaygroundState } from './types'
 import { prepareInitialState } from './utils/prepare-initial-state'
 
-export const PlaygroundController: Component<
-  PlaygroundControllerProps
-> = props => {
-  const [{ controls }] = splitProps(props, ['controls'])
+export const PlaygroundController: Component<PlaygroundControllerProps> = p => {
+  const [{ controls }] = splitProps(mergeProps({ componentProps: {} }, p), [
+    'controls',
+  ])
 
   const [state, setState] = createStore<PlaygroundState>(
     prepareInitialState(controls),
@@ -19,12 +19,12 @@ export const PlaygroundController: Component<
 
   return (
     <PlaygroundContext.Provider
-      value={[{ ...props, state }, { handleChange: setState }]}
+      value={[{ ...p, state }, { handleChange: setState }]}
     >
       <PlaygroundView>
         <PlaygroundComponent />
         <PlaygroundControls />
-        <PlaygroundCode visible={Boolean(props.showCode)} />
+        <PlaygroundCode visible={!!p.showCode} />
       </PlaygroundView>
     </PlaygroundContext.Provider>
   )

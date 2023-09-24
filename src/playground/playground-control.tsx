@@ -1,5 +1,5 @@
 import { capitalize } from '@creation-ui/core'
-import { Input, ToggleGroup, Switch } from '@creation-ui/solid'
+import { Input, Switch, ToggleGroup } from '@creation-ui/solid'
 import clsx from 'clsx'
 import get from 'lodash.get'
 import {
@@ -38,11 +38,10 @@ export const PlaygroundControlComponent: Component<
   const label = getLabel(property.name, property.label)
   const controlType = getCtrlType(property)
 
+  const isType = (type: string) => type === controlType
   const onClear = () => handleChange(name, '')
   const handleInputChange = (e: any) => handleChange(name, e.target.value)
   const handlePlainChange = (value: any) => handleChange(name, value)
-
-  const isType = (type: string) => type === controlType
 
   return (
     <SolidSwitch fallback={`Control type ${controlType} not supported yet`}>
@@ -103,7 +102,7 @@ export const PlaygroundControlComponent: Component<
           type={'text'}
           value={get(state, name) as string}
           onClear={onClear}
-          clearable={!!value}
+          clearable={!!get(state, name)}
           helperText={props.property.helperText}
         />
       </Match>

@@ -1,5 +1,6 @@
 import { cva } from 'class-variance-authority'
 import { Icon, IconProps } from '../icon'
+import { splitProps } from 'solid-js'
 
 interface DropdownChevronProps extends Omit<IconProps, 'icon'> {
   open?: boolean
@@ -19,16 +20,18 @@ const chevron = cva(
         true: ['rotate-180'],
       },
     },
-  },
+  }
 )
 
-const DropdownChevron = ({ open, ...props }: DropdownChevronProps) => (
-  <Icon
-    icon='chevron_down'
-    class={chevron({ open })}
-    aria-hidden='true'
-    {...props}
-  />
-)
+const DropdownChevron = (p: DropdownChevronProps) => {
+  return (
+    <Icon
+      icon='chevron_down'
+      class={chevron({ open: p.open })}
+      aria-hidden='true'
+      {...p}
+    />
+  )
+}
 
 export default DropdownChevron

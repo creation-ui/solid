@@ -4,14 +4,14 @@ import { useConfig } from '../contexts'
 import { renderComponent } from '../utils'
 import { LocaleSwitch } from './locale-switch'
 
-export function Footer({ menu }: { menu?: boolean }): ReactElement {
+export function Footer(props: { menu?: boolean }): ReactElement {
   const config = useConfig()
   return (
     <footer class="nx-bg-gray-100 nx-pb-[env(safe-area-inset-bottom)] dark:nx-bg-neutral-900 print:nx-bg-transparent">
       <div
         class={cn(
           'nx-mx-auto nx-flex nx-max-w-[90rem] nx-gap-2 nx-py-2 nx-px-4',
-          menu && (config.i18n.length > 0 || config.darkMode)
+          props.menu && (config.i18n.length > 0 || config.darkMode)
             ? 'nx-flex'
             : 'nx-hidden'
         )}

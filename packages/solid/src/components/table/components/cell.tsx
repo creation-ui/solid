@@ -5,20 +5,20 @@ export interface CellProps {
   cell: CellType<any, unknown>
 }
 
-export const Cell = ({ cell }: CellProps) => {
-  const column = cell.column
+export const Cell = (props: CellProps) => {
+  const column = props.cell.column
   const width = column.getSize()
 
   const { className, align, ...meta } =
-    (cell.column.columnDef.meta as any) ?? {}
+    (props.cell.column.columnDef.meta as any) ?? {}
   return (
     <td
       class={cellClasses({ className, align })}
-      key={cell.id}
+      
       style={{ width }}
       {...meta}
     >
-      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+      {flexRender(props.cell.column.columnDef.cell, props.cell.getContext())}
     </td>
   )
 }

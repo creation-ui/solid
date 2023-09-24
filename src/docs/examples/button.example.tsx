@@ -16,6 +16,8 @@ export const ButtonPlayground = () => (
   <Playground
     component={Button}
     name='Button'
+    componentProps={{}}
+    showCode
     controls={[
       childrenControl,
       sizeControl,

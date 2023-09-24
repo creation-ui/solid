@@ -6,7 +6,7 @@ interface BuggyProps {
   className?: string
 }
 
-export const Buggy = ({ value, className }: BuggyProps) => (
+export const Buggy = (props: BuggyProps) => (
   <FloatingPortal>
     <>
       <div
@@ -26,12 +26,12 @@ export const Buggy = ({ value, className }: BuggyProps) => (
             'shadow-xl',
             'max-h-1/2',
           ],
-          className,
+          props.className,
         )}
       >
         <h4 class='leading-relaxed text-xl font-semibold'>Debug</h4>
         <pre class='text-xs overflow-y-auto'>
-          {JSON.stringify(value, null, 2)}
+          {JSON.stringify(props.value, null, 2)}
         </pre>
       </div>
     </>

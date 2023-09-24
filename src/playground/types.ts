@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js'
+import { Component, JSX, ParentComponent } from 'solid-js'
 import { SetStoreFunction } from 'solid-js/store'
 
 export type PlaygroundValueType =
@@ -29,7 +29,7 @@ export type PlaygroundControl = {
 
 export interface PlaygroundControllerProps {
   name: string
-  component: JSX.Element
+  component: Component<any> | ParentComponent<any>
   controls: PlaygroundControl[]
   showCode?: boolean
   componentProps?: any

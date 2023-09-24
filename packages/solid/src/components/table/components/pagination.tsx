@@ -1,26 +1,30 @@
-import { useMemo } from 'react'
+import { JSX } from 'solid-js'
+import { memo } from 'solid-js/web'
+import { Button } from '../../button'
 import { Icon } from '../../icon'
+import { Select } from '../../select'
 import { paginationClasses } from '../classes'
 import { useTable } from '../table.context'
 import { getSortedSizes } from '../utils/get-sorted-sizes'
-import { Button } from '../../button'
-import { Select } from '../../select'
 
-interface PaginationBlockProps extends React.ComponentProps<'button'> {
+interface PaginationBlockProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   current?: boolean
   disabled?: boolean
 }
 
-const PaginationBlock = ({
-  value,
-  current,
-  disabled,
-  ...props
-}: PaginationBlockProps) => (
-  <button class={paginationClasses({ current, disabled })} {...props}>
-    {value}
-  </button>
-)
+const PaginationBlock = (p: PaginationBlockProps) => {
+  return (
+    <button
+      class={paginationClasses({
+        current: p.current,
+        disabled: p.disabled,
+      })}
+      {...p}
+    >
+      {p.current}
+    </button>
+  )
+}
 
 const PageSelectorButtons = () => {
   const { table, pagination } = useTable()
@@ -52,9 +56,9 @@ const PageSelector = () => {
   const currentPageIdx = table.getState().pagination.pageIndex
   const totalPages = table.getPageCount()
 
-  const pagesArray = useMemo(
+  const pagesArray = memo(
     () => Array.from({ length: totalPages }, (_, i) => i),
-    [totalPages],
+    true
   )
 
   const goToPage = (idx: number) => table.setPageIndex(idx)
@@ -73,7 +77,7 @@ const PageSelector = () => {
         class='relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
         onClick={() => table.previousPage()}
         disabled={!table.getCanPreviousPage()}
-      ></Button>
+      />
 
       {!withEllipsis &&
         pagesArray.map(idx => (
@@ -173,7 +177,7 @@ const Pagination = () => {
               <p class='text-xs text-gray-700 dark:text-gray-400'>
                 {texts?.total?.replace(
                   '{resultsCount}',
-                  resultsCount.toString(),
+                  resultsCount.toString()
                 )}
               </p>
             )}

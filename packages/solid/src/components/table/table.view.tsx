@@ -1,3 +1,4 @@
+import { For } from "solid-js";
 import clsx from 'clsx'
 import { Callout } from '../callout'
 import { LoadingOverlay } from '../loading-overlay'
@@ -24,20 +25,20 @@ const Table = () => {
   return (
     <div class='overflow-hidden rounded-lg relative'>
       <LoadingOverlay active={loading} />
-      <table class={tableClasses()} style={{ height, maxHeight: height }}>
+      <table class={tableClasses()} style={{ height, "max-height": height }}>
         <thead class={headerClasses}>
-          {head.map(headerGroup => (
-            <tr key={headerGroup.id} class={headerRowClasses}>
-              {headerGroup.headers.map(column => (
+          <For each={head}>{headerGroup => (
+            <tr  class={headerRowClasses}>
+              <For each={headerGroup.headers}>{column => (
                 <HeaderCell header={column} key={column.id} />
-              ))}
+              )}</For>
             </tr>
-          ))}
+          )}</For>
         </thead>
         {error ? (
           <div
             class={clsx(sharedTableClasses.border, 'relative', 'w-full')}
-            style={{ height, maxHeight: height }}
+            style={{ height, "max-height": height }}
           >
             <div
               class={clsx(
@@ -59,21 +60,21 @@ const Table = () => {
             </div>
           </div>
         ) : (
-          <tbody class={bodyClasses()} style={{ height, maxHeight: height }}>
-            {data.rows.map(row => (
+          <tbody class={bodyClasses()} style={{ height, "max-height": height }}>
+            <For each={data.rows}>{row => (
               <Row key={row.id} row={row} />
-            ))}
+            )}</For>
           </tbody>
         )}
 
         <tfoot class={footerClasses}>
-          {foot.map(group => (
-            <tr key={group.id}>
-              {group.headers.map(column => (
+          <For each={foot}>{group => (
+            <tr >
+              <For each={group.headers}>{column => (
                 <FooterCell footer={column} key={column.id} />
-              ))}
+              )}</For>
             </tr>
-          ))}
+          )}</For>
           {pagination && <Pagination />}
         </tfoot>
       </table>

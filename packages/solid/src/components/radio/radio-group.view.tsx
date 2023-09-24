@@ -1,9 +1,7 @@
 import { useInputBase } from '../input-base/input-base.context'
 import type { RadioGroupProps } from './types'
 
-export const RadioGroupComponentView = ({
-  children,
-}: Pick<RadioGroupProps, 'children'>) => {
+export const RadioGroupComponentView = (props: Pick<RadioGroupProps, 'children'>) => {
   const { disabled, readOnly, classes } = useInputBase()
 
   return (
@@ -12,7 +10,7 @@ export const RadioGroupComponentView = ({
       aria-readonly={readOnly}
       class={classes.container}
     >
-      <div class={'flex flex-col gap-2'}>{children}</div>
+      <div class={'flex flex-col gap-2'}>{props.children}</div>
     </div>
   )
 }

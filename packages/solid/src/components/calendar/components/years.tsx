@@ -30,7 +30,7 @@ export const CalendarYearsView = () => {
   const rows: ReactNode[] = []
   for (let i = 0; i < yearsGrid.length; i += 4) {
     rows.push(
-      <div key={i} class='flex justify-between mb-2'>
+      <div  class='flex justify-between mb-2'>
         {yearsGrid.slice(i, i + 4)}
       </div>,
     )

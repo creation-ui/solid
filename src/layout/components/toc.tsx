@@ -18,14 +18,14 @@ const linkClassName = cn(
   'contrast-more:nx-text-gray-800 contrast-more:dark:nx-text-gray-50'
 )
 
-export function TOC({ headings, filePath }: TOCProps): ReactElement {
+export function TOC(props: TOCProps): ReactElement {
   const activeAnchor = useActiveAnchor()
   const config = useConfig()
   const tocRef = useRef<HTMLDivElement>(null)
 
   const items = useMemo(
-    () => headings.filter(heading => heading.depth > 1),
-    [headings]
+    () => props.headings.filter(heading => heading.depth > 1),
+    [props.headings]
   )
 
   const hasHeadings = items.length > 0
@@ -120,7 +120,7 @@ export function TOC({ headings, filePath }: TOCProps): ReactElement {
           ) : null}
 
           {renderComponent(config.editLink.component, {
-            filePath,
+            props.filePath,
             class: linkClassName,
             children: renderComponent(config.editLink.text)
           })}

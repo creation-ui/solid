@@ -1,12 +1,25 @@
+import { cva } from 'class-variance-authority'
 import clsx from 'clsx'
 import { Code, Pre, Table, Td, Th, Tr } from 'nextra/components'
 import type { Components } from 'nextra/mdx'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import { Children, cloneElement, useEffect, useRef, useState } from 'react'
 import { Anchor, Collapse } from './components'
 import type { AnchorProps } from './components/anchor'
 import { DetailsProvider, useDetails, useSetActiveAnchor } from './contexts'
 import { useIntersectionObserver, useSlugs } from './contexts/active-anchor'
+import { Dynamic } from 'solid-js/web'
+
+const headerClasses = cva(
+  ['nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100'],
+  {variants:{
+    header:{
+      h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
+      h3: 'nx-mt-8 nx-text-2xl',
+      h4: 'nx-mt-8 nx-text-xl',
+      h5: 'nx-mt-8 nx-text-lg',
+      h6: 'nx-mt-8 nx-text-base'
+    }
+  }}
+)
 
 // Anchor links
 function HeadingLink({
@@ -19,7 +32,7 @@ function HeadingLink({
 }: ComponentProps<'h2'> & {
   tag: `h${2 | 3 | 4 | 5 | 6}`
   context: { index: number }
-}): ReactElement {
+}) {
   const setActiveAnchor = useSetActiveAnchor()
   const slugs = useSlugs()
   const observer = useIntersectionObserver()
@@ -44,21 +57,13 @@ function HeadingLink({
   }, [id, context, slugs, observer, setActiveAnchor])
 
   return (
-    <Tag
+    <Dynamic
+    component={Tag}
       class={
         // can be added by footnotes
         className === 'sr-only'
           ? 'nx-sr-only'
-          : clsx(
-              'nx-font-semibold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100',
-              {
-                h2: 'nx-mt-10 nx-border-b nx-pb-1 nx-text-3xl nx-border-neutral-200/70 contrast-more:nx-border-neutral-400 dark:nx-border-primary-100/10 contrast-more:dark:nx-border-neutral-400',
-                h3: 'nx-mt-8 nx-text-2xl',
-                h4: 'nx-mt-8 nx-text-xl',
-                h5: 'nx-mt-8 nx-text-lg',
-                h6: 'nx-mt-8 nx-text-base'
-              }[Tag]
-            )
+          : headerClasses({ header: Tag.toLowerCase() })
       }
       {...props}
     >
@@ -72,7 +77,7 @@ function HeadingLink({
           ref={obRef}
         />
       )}
-    </Tag>
+    </Dynamic>
   )
 }
 

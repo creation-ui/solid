@@ -107,7 +107,7 @@ export const CalendarDaysView = () => {
     }
 
     rows.push(
-      <div key={`week-${date.toString()}`} class='flex justify-between'>
+      <div  class='flex justify-between'>
         {days}
       </div>,
     )
@@ -118,7 +118,7 @@ export const CalendarDaysView = () => {
       <div class='flex justify-between py-2 text-xs font-semibold capitalize'>
         {dayNames.map((dayName, i) => (
           <div
-            key={dayName}
+            
             class={calendarDaysViewClasses.day({
               isWeekend: [5, 6].includes(i),
             })}

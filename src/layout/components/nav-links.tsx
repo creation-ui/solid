@@ -18,16 +18,13 @@ const classes = {
   icon: cn('nx-inline nx-h-5 nx-shrink-0')
 }
 
-export const NavLinks = ({
-  flatDirectories,
-  currentIndex
-}: NavLinkProps): ReactElement | null => {
+export const NavLinks = (props: NavLinkProps): ReactElement | null => {
   const config = useConfig()
   const nav = config.navigation
   const navigation: Exclude<DocsThemeConfig['navigation'], boolean> =
     typeof nav === 'boolean' ? { prev: nav, next: nav } : nav
-  let prev = navigation.prev && flatDirectories[currentIndex - 1]
-  let next = navigation.next && flatDirectories[currentIndex + 1]
+  let prev = navigation.prev && props.flatDirectories[props.currentIndex - 1]
+  let next = navigation.next && props.flatDirectories[props.currentIndex + 1]
 
   if (prev && !prev.isUnderCurrentDocsTree) prev = false
   if (next && !next.isUnderCurrentDocsTree) next = false

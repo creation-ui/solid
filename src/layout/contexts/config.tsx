@@ -64,10 +64,7 @@ function validateMeta(pageMap: PageMapItem[]) {
   }
 }
 
-export const ConfigProvider = ({
-  children,
-  value: { themeConfig, pageOpts }
-}: {
+export const ConfigProvider = (props: {
   children: ReactNode
   value: Context
 }): ReactElement => {
@@ -119,7 +116,7 @@ export const ConfigProvider = ({
       forcedTheme={nextThemes.forcedTheme}
     >
       <ConfigContext.Provider value={extendedConfig}>
-        <MenuProvider value={{ menu, setMenu }}>{children}</MenuProvider>
+        <MenuProvider value={{ menu, setMenu }}>{props.children}</MenuProvider>
       </ConfigContext.Provider>
     </ThemeProvider>
   )

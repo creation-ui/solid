@@ -1,3 +1,4 @@
+import { For } from "solid-js";
 import { Row as RowProps } from '@tanstack/react-table'
 import clsx from 'clsx'
 import { rowGridClasses } from '../classes'
@@ -7,8 +8,8 @@ interface RowCellProps {
   row: RowProps<any>
 }
 
-const Row = ({ row }: RowCellProps) => {
-  const cells = row.getVisibleCells()
+const Row = (props: RowCellProps) => {
+  const cells = props.row.getVisibleCells()
 
   return (
     <tr
@@ -17,9 +18,9 @@ const Row = ({ row }: RowCellProps) => {
         rowGridClasses,
       )}
     >
-      {cells.map(cell => (
+      <For each={cells}>{cell => (
         <Cell key={cell.id} cell={cell} />
-      ))}
+      )}</For>
     </tr>
   )
 }

@@ -35,7 +35,7 @@ export const CalendarMonthsView = () => {
   const rows: ReactNode[] = []
   for (let i = 0; i < months.length; i += 4) {
     rows.push(
-      <div key={i} class='flex justify-between mb-2'>
+      <div  class='flex justify-between mb-2'>
         {months.slice(i, i + 4)}
       </div>,
     )

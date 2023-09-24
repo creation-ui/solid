@@ -1,27 +1,21 @@
 import React from 'react'
 import { Input } from '../../input'
 
-function DebouncedInput({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  size,
-  ...props
-}: {
+function DebouncedInput(_props: {
   value: string | number
   onChange: (value: string | number) => void
   debounce?: number
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
-  const [value, setValue] = React.useState(initialValue)
+    const [props, rest] = splitProps(mergeProps({ debounce: 500 }, _props), ["value", "onChange", "debounce", "size"]);const [value, setValue] = React.useState(props.value)
 
   React.useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
+    setValue(props.value)
+  }, [props.value])
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
-      onChange(value)
-    }, debounce)
+      props.onChange(value)
+    }, props.debounce)
 
     return () => clearTimeout(timeout)
   }, [value])

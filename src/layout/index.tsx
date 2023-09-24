@@ -37,23 +37,17 @@ const classes = {
   main: cn('nx-w-full nx-break-words')
 }
 
-const Body = ({
-  themeContext,
-  breadcrumb,
-  timestamp,
-  navigation,
-  children
-}: BodyProps): ReactElement => {
+const Body = (props: BodyProps): ReactElement => {
   const config = useConfig()
   const mounted = useMounted()
 
-  if (themeContext.layout === 'raw') {
-    return <div class={classes.main}>{children}</div>
+  if (props.themeContext.layout === 'raw') {
+    return <div class={classes.main}>{props.children}</div>
   }
 
   const date =
-    themeContext.timestamp && config.gitTimestamp && timestamp
-      ? new Date(timestamp)
+    props.themeContext.timestamp && config.gitTimestamp && props.timestamp
+      ? new Date(props.timestamp)
       : null
 
   const gitTimestampEl =
@@ -68,15 +62,15 @@ const Body = ({
 
   const content = (
     <>
-      {children}
+      {props.children}
       {gitTimestampEl}
-      {navigation}
+      {props.navigation}
     </>
   )
 
   const body = config.main?.({ children: content }) || content
 
-  if (themeContext.layout === 'full') {
+  if (props.themeContext.layout === 'full') {
     return (
       <article
         class={cn(
@@ -94,26 +88,19 @@ const Body = ({
       class={cn(
         classes.main,
         'nextra-content nx-flex nx-min-h-[calc(100vh-var(--nextra-navbar-height))] nx-min-w-0 nx-justify-center nx-pb-8 nx-pr-[calc(env(safe-area-inset-right)-1.5rem)]',
-        themeContext.typesetting === 'article' &&
+        props.themeContext.typesetting === 'article' &&
           'nextra-body-typesetting-article'
       )}
     >
       <main class="nx-w-full nx-min-w-0 nx-max-w-6xl nx-px-6 nx-pt-4 md:nx-px-12">
-        {breadcrumb}
+        {props.breadcrumb}
         {body}
       </main>
     </article>
   )
 }
 
-const InnerLayout = ({
-  filePath,
-  pageMap,
-  frontMatter,
-  headings,
-  timestamp,
-  children
-}: PageOpts & { children: ReactNode }): ReactElement => {
+const InnerLayout = (props: PageOpts & { children: ReactNode }): ReactElement => {
   const config = useConfig()
   const { locale = DEFAULT_LOCALE, defaultLocale } = useRouter()
   const fsPath = useFSRoute()
@@ -131,15 +118,15 @@ const InnerLayout = ({
   } = useMemo(
     () =>
       normalizePages({
-        list: pageMap,
+        list: props.pageMap,
         locale,
         defaultLocale,
         route: fsPath
       }),
-    [pageMap, locale, defaultLocale, fsPath]
+    [props.pageMap, locale, defaultLocale, fsPath]
   )
 
-  const themeContext = { ...activeThemeContext, ...frontMatter }
+  const themeContext = { ...activeThemeContext, ...props.frontMatter }
   const hideSidebar =
     !themeContext.sidebar ||
     themeContext.layout === 'raw' ||
@@ -159,8 +146,8 @@ const InnerLayout = ({
         aria-label="table of contents"
       >
         {renderComponent(config.toc.component, {
-          headings: config.toc.float ? headings : [],
-          filePath
+          headings: config.toc.float ? props.headings : [],
+          props.filePath
         })}
       </nav>
     )
@@ -200,7 +187,7 @@ const InnerLayout = ({
             docsDirectories={docsDirectories}
             flatDirectories={flatDirectories}
             fullDirectories={directories}
-            headings={headings}
+            headings={props.headings}
             asPopover={hideSidebar}
             includePlaceholder={themeContext.layout === 'default'}
           />
@@ -213,7 +200,7 @@ const InnerLayout = ({
                 <Breadcrumb activePath={activePath} />
               ) : null
             }
-            timestamp={timestamp}
+            timestamp={props.timestamp}
             navigation={
               activeType !== 'page' && themeContext.pagination ? (
                 <NavLinks
@@ -229,7 +216,7 @@ const InnerLayout = ({
                 components: config.components
               })}
             >
-              {children}
+              {props.children}
             </MDXProvider>
           </Body>
         </ActiveAnchorProvider>
@@ -240,13 +227,11 @@ const InnerLayout = ({
   )
 }
 
-export default function Layout({
-  children,
-  ...context
-}: NextraThemeLayoutProps): ReactElement {
-  return (
+export default function Layout(_props: NextraThemeLayoutProps): ReactElement {
+    const [props, context] = splitProps(_props, ["children"]);
+return (
     <ConfigProvider value={context}>
-      <InnerLayout {...context.pageOpts}>{children}</InnerLayout>
+      <InnerLayout {...context.pageOpts}>{props.children}</InnerLayout>
     </ConfigProvider>
   )
 }

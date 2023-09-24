@@ -32,9 +32,7 @@ export const useIntersectionObserver = () =>
   useContext(IntersectionObserverContext)
 export const useSlugs = () => useContext(SlugsContext)
 
-export const ActiveAnchorProvider = ({
-  children
-}: {
+export const ActiveAnchorProvider = (props: {
   children: ReactNode
 }): ReactElement => {
   const [activeAnchor, setActiveAnchor] = useState<ActiveAnchor>({})
@@ -97,7 +95,7 @@ export const ActiveAnchorProvider = ({
       <SetActiveAnchorContext.Provider value={setActiveAnchor}>
         <SlugsContext.Provider value={slugs}>
           <IntersectionObserverContext.Provider value={observerRef.current}>
-            {children}
+            {props.children}
           </IntersectionObserverContext.Provider>
         </SlugsContext.Provider>
       </SetActiveAnchorContext.Provider>

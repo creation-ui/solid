@@ -1,42 +1,37 @@
-import { useEffect, useRef } from 'react'
+import { JSX, createEffect } from 'solid-js'
 import { useInputBase } from '../input-base/input-base.context'
 import { CheckboxProps } from './checkbox.types'
 import { checkboxClasses } from './classes'
 
-export const CheckboxView = ({
-  size,
-  className,
-  indeterminate,
-  ...props
-}: CheckboxProps) => {
-  const ref = useRef<HTMLInputElement>(null)
+export const CheckboxView = (p: CheckboxProps) => {
+  let ref: HTMLInputElement | undefined
   const { componentId, error, readOnly, disabled } = useInputBase()
   const checkboxClassNames = checkboxClasses({
-    size,
-    className,
+    size: p.size,
+    class: p.className,
     error: !!error,
     readOnly,
   })
 
-  useEffect(() => {
-    if (indeterminate && ref.current) {
-      ;(ref.current as any).indeterminate = true
+  createEffect(() => {
+    if (p.indeterminate) {
+      ref.indeterminate = true
     }
-  }, [indeterminate])
+  })
 
-  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const _onChange: JSX.ChangeEventHandler<HTMLInputElement, Event> = e => {
     if (readOnly || disabled) {
       e.preventDefault()
       return
     }
 
-    props.onChange?.(e)
+    p.onChange?.(e)
   }
 
   return (
     <input
       ref={ref}
-      {...props}
+      {...p}
       onChange={_onChange}
       disabled={disabled}
       readOnly={readOnly}

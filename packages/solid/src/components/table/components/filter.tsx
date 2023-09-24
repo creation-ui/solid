@@ -1,80 +1,74 @@
+import { Show, For } from "solid-js";
 import type { Column, Table } from '@tanstack/react-table'
 import React from 'react'
 import DebouncedInput from './debounced-input'
 
-export default function Filter({
-  column,
-  table,
-}: {
+export default function Filter(props: {
   column: Column<any, unknown>
   table: Table<any>
 }) {
-  const firstValue = table
+  const firstValue = props.table
     .getPreFilteredRowModel()
-    .flatRows[0]?.getValue(column.id)
+    .flatRows[0]?.getValue(props.column.id)
 
-  const columnFilterValue = column.getFilterValue()
+  const columnFilterValue = props.column.getFilterValue()
 
   const sortedUniqueValues = React.useMemo(
     () =>
       typeof firstValue === 'number'
         ? []
-        : Array.from(column.getFacetedUniqueValues().keys()).sort(),
-    [column.getFacetedUniqueValues()],
+        : Array.from(props.column.getFacetedUniqueValues().keys()).sort(),
+    [props.column.getFacetedUniqueValues()],
   )
 
-  return typeof firstValue === 'number' ? (
-    <div>
+  return <Show when={typeof firstValue === 'number'} fallback={<>
+      <datalist id={props.column.id + 'list'}>
+        <For each={sortedUniqueValues.slice(0, 5000)}>{(value: any) => (
+          <option value={value}  />
+        )}</For>
+      </datalist>
+      <DebouncedInput
+        type='text'
+        value={(columnFilterValue ?? '') as string}
+        onChange={value => props.column.setFilterValue(value)}
+        placeholder={`Search... (${props.column.getFacetedUniqueValues().size})`}
+        class='w-36 border shadow rounded'
+        list={props.column.id + 'list'}
+      />
+      <div class='h-1' />
+    </>}><div>
       <div class='flex space-x-2'>
         <DebouncedInput
           type='number'
-          min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-          max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+          min={Number(props.column.getFacetedMinMaxValues()?.[0] ?? '')}
+          max={Number(props.column.getFacetedMinMaxValues()?.[1] ?? '')}
           value={(columnFilterValue as [number, number])?.[0] ?? ''}
           onChange={value =>
-            column.setFilterValue((old: [number, number]) => [value, old?.[1]])
+            props.column.setFilterValue((old: [number, number]) => [value, old?.[1]])
           }
           placeholder={`Min ${
-            column.getFacetedMinMaxValues()?.[0]
-              ? `(${column.getFacetedMinMaxValues()?.[0]})`
+            props.column.getFacetedMinMaxValues()?.[0]
+              ? `(${props.column.getFacetedMinMaxValues()?.[0]})`
               : ''
           }`}
           class='w-24 border shadow rounded'
         />
         <DebouncedInput
           type='number'
-          min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-          max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+          min={Number(props.column.getFacetedMinMaxValues()?.[0] ?? '')}
+          max={Number(props.column.getFacetedMinMaxValues()?.[1] ?? '')}
           value={(columnFilterValue as [number, number])?.[1] ?? ''}
           onChange={value =>
-            column.setFilterValue((old: [number, number]) => [old?.[0], value])
+            props.column.setFilterValue((old: [number, number]) => [old?.[0], value])
           }
           placeholder={`Max ${
-            column.getFacetedMinMaxValues()?.[1]
-              ? `(${column.getFacetedMinMaxValues()?.[1]})`
+            props.column.getFacetedMinMaxValues()?.[1]
+              ? `(${props.column.getFacetedMinMaxValues()?.[1]})`
               : ''
           }`}
           class='w-24 border shadow rounded'
         />
       </div>
       <div class='h-1' />
-    </div>
-  ) : (
-    <>
-      <datalist id={column.id + 'list'}>
-        {sortedUniqueValues.slice(0, 5000).map((value: any) => (
-          <option value={value} key={value} />
-        ))}
-      </datalist>
-      <DebouncedInput
-        type='text'
-        value={(columnFilterValue ?? '') as string}
-        onChange={value => column.setFilterValue(value)}
-        placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
-        class='w-36 border shadow rounded'
-        list={column.id + 'list'}
-      />
-      <div class='h-1' />
-    </>
-  )
+    </div></Show>
 }

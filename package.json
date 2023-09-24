@@ -58,6 +58,7 @@
     "@types/lodash-es": "^4.17.9",
     "@types/prismjs": "^1.26.0",
     "babel-plugin-prismjs": "^2.1.0",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "git-url-parse": "^13.1.0",
     "js": "link:@types/@mdi/js",

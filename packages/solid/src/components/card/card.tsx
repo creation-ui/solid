@@ -28,20 +28,20 @@ const classes = {
   footer: [],
 }
 
-export const Card = ({ children, className }: CardProps) => {
-  return <div class={twMerge(className, classes.card)}>{children}</div>
+export const Card = (props: CardProps) => {
+  return <div class={twMerge(props.className, classes.card)}>{props.children}</div>
 }
 
-const Header = ({ children, className }: CardProps) => {
-  return <h3 class={twMerge(className, classes.header)}>{children}</h3>
+const Header = (props: CardProps) => {
+  return <h3 class={twMerge(props.className, classes.header)}>{props.children}</h3>
 }
 
-const Body = ({ children, className }: CardProps) => {
-  return <div class={twMerge(className, classes.body)}>{children}</div>
+const Body = (props: CardProps) => {
+  return <div class={twMerge(props.className, classes.body)}>{props.children}</div>
 }
 
-const Footer = ({ children, className }: CardProps) => {
-  return <div class={twMerge(className, classes.footer)}>{children}</div>
+const Footer = (props: CardProps) => {
+  return <div class={twMerge(props.className, classes.footer)}>{props.children}</div>
 }
 
 Card.Footer = Footer

@@ -7,21 +7,21 @@ interface FooterCellProps {
 
 const footerClass = 'p-2 text-xs font-medium text-gray-500 dark:text-gray-200'
 
-export default function FooterCell({ footer }: FooterCellProps) {
-  const width = footer.column.getSize()
+export default function FooterCell(props: FooterCellProps) {
+  const width = props.footer.column.getSize()
   const { className = '', ...meta } =
-    (footer.column.columnDef.meta as any) ?? {}
+    (props.footer.column.columnDef.meta as any) ?? {}
   return (
     <td
-      colSpan={footer.colSpan}
+      colSpan={props.footer.colSpan}
       scope='col'
       class={twMerge(footerClass, className)}
       style={{ width }}
       {...meta}
     >
-      {footer.isPlaceholder ? null : (
+      {props.footer.isPlaceholder ? null : (
         <div class={'flex items-center'}>
-          {flexRender(footer.column.columnDef.footer, footer.getContext())}
+          {flexRender(props.footer.column.columnDef.footer, props.footer.getContext())}
         </div>
       )}
     </td>

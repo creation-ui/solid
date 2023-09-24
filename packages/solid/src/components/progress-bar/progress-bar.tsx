@@ -98,7 +98,7 @@ const ProgressBar = (props: ProgressBarProps) => {
       <div
         class={progressBar({ size, value: value !== 0, status })}
         style={{ width }}
-      ></div>
+       />
       <span class={progressValue({ invert, size })}>
         {showValue && formattedValue}
       </span>

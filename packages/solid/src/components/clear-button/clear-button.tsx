@@ -28,19 +28,16 @@ export interface ClearButtonProps extends Omit<IconProps, 'icon' | 'size'> {
   ref?: HTMLElement
 }
 
-const ClearButton: Component<ClearButtonProps> = ({
-  onClick,
-  className,
-  size,
-  ...props
-}) => (
-  <Icon
-    icon='close'
-    onClick={onClick}
-    class={twMerge(classes({ size }), className)}
-    aria-hidden='true'
-    {...props}
-  />
-)
+const ClearButton: Component<ClearButtonProps> = p => {
+  return (
+    <Icon
+      icon='close'
+      onClick={p.onClick}
+      class={twMerge(classes({ size: p.size }), p.className)}
+      aria-hidden='true'
+      {...p}
+    />
+  )
+}
 
 export default ClearButton

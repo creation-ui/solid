@@ -41,24 +41,24 @@ const headerCellClass = cva(
   },
 )
 
-export default function HeaderCell({ header }: HeaderCellProps) {
+export default function HeaderCell(props: HeaderCellProps) {
   const { table } = useTable()
-  const width = header.column.getSize()
-  const sortable = header.column.getCanSort()
-  const isSorted = header.column.getIsSorted()
+  const width = props.header.column.getSize()
+  const sortable = props.header.column.getCanSort()
+  const isSorted = props.header.column.getIsSorted()
 
   const { className, align, ...meta } =
-    (header.column.columnDef.meta as any) ?? {}
+    (props.header.column.columnDef.meta as any) ?? {}
 
   return (
     <th
-      colSpan={header.colSpan}
+      colSpan={props.header.colSpan}
       scope='col'
-      onClick={header.column.getToggleSortingHandler()}
+      onClick={props.header.column.getToggleSortingHandler()}
       class={cellClasses({ align, className, padding: false })}
       {...meta}
     >
-      {header.isPlaceholder ? null : (
+      {props.header.isPlaceholder ? null : (
         <div
           style={{ width }}
           class={headerCellClass({
@@ -67,7 +67,7 @@ export default function HeaderCell({ header }: HeaderCellProps) {
           })}
         >
           <span class={clsx('flex', 'items-center')}>
-            {flexRender(header.column.columnDef.header, header.getContext())}
+            {flexRender(props.header.column.columnDef.header, props.header.getContext())}
             {isSorted && (
               <Icon
                 aria-hidden='true'
@@ -79,8 +79,8 @@ export default function HeaderCell({ header }: HeaderCellProps) {
             )}
           </span>
 
-          {header.column.getCanFilter() ? (
-            <Filter column={header.column} table={table} />
+          {props.header.column.getCanFilter() ? (
+            <Filter column={props.header.column} table={table} />
           ) : null}
         </div>
       )}
