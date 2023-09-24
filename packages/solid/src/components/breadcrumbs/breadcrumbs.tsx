@@ -1,20 +1,19 @@
-import type { FC, ReactNode } from 'react'
-import { useMemo } from 'react'
-import { BreadcrumbLink, ElementSize } from '@creation-ui/core'
+import { BreadcrumbLink, ElementSize, JSXNode } from '@creation-ui/core'
+import { cva } from 'class-variance-authority'
+import { mergeProps, JSX, Component } from 'solid-js'
+import { Icon } from '../icon'
 import { BreadcrumbItem } from './breadcrumb-item'
 import { separators } from './seperators'
-import { Icon } from '../icon'
-import { cva } from 'class-variance-authority'
 
-export interface BreadcrumbsProps extends React.HTMLProps<HTMLElement> {
+export interface BreadcrumbsProps extends JSX.HTMLAttributes<HTMLDivElement> {
   /**
    * You can provide a custom home icon or disable it
    */
-  homeIcon?: ReactNode | false
+  homeIcon?: JSXNode | false
   /**
    * You can provide a custom separator
    */
-  separator?: ReactNode | 'chevron' | 'slash' | 'dot'
+  separator?: JSXNode | 'chevron' | 'slash' | 'dot'
   /**
    * first will be treated as home path
    */
@@ -32,34 +31,37 @@ const listClasses = cva(['inline-flex', 'items-center'], {
   },
 })
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = ({
-  links,
-  separator = 'chevron',
-  homeIcon = <Icon icon='home' />,
-  spacing = 'sm',
-  ...props
-}) => {
-  const normalizedLinks = useMemo(() => {
-    return links?.map((link, idx) => {
-      return typeof link === 'string'
-        ? { href: link, label: link, id: idx }
-        : link
-    })
-  }, [links])
+export const Breadcrumbs: Component<BreadcrumbsProps> = _props => {
+  const props = mergeProps(
+    { separator: 'chevron', homeIcon: <Icon icon='home' />, spacing: 'sm' },
+    _props
+  )
+
+  const normalizedLinks = props.links?.map((link, idx) => {
+    return typeof link === 'string'
+      ? { href: link, label: link, id: idx }
+      : link
+  })
 
   const separatingIcon =
-    typeof separator === 'string' ? separators[separator] : separator
+    typeof props.separator === 'string'
+      ? separators[props.separator]
+      : props.separator
 
   return (
     <nav class='flex' {...props}>
-      <ol class={listClasses({ spacing })}>
+      <ol class={listClasses({ spacing: props.spacing })}>
         {normalizedLinks?.map((link, idx, array) => (
           <BreadcrumbItem
             count={array?.length}
             index={idx}
             link={link}
             separator={
-              idx === 0 ? <div class='mr-1'>{homeIcon}</div> : separatingIcon
+              idx === 0 ? (
+                <div class='mr-1'>{props.homeIcon}</div>
+              ) : (
+                separatingIcon
+              )
             }
             key={link.href}
           />

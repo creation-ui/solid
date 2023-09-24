@@ -1,5 +1,6 @@
 import { cva } from 'class-variance-authority'
 import type { BoxProps } from './box.types'
+import { mergeProps } from 'solid-js'
 
 const box = cva([], {
   variants: {
@@ -24,8 +25,13 @@ const box = cva([], {
   },
 })
 
-export const Box = ({ children, className, border = true }: BoxProps) => (
-  <div class={box({ body: 'base', className })}>
-    <div class={box({ content: 'base', border })}>{children}</div>
-  </div>
-)
+export const Box = (_props: BoxProps) => {
+  const props = mergeProps({ border: true }, _props)
+  return (
+    <div class={box({ body: 'base', class: props.className })}>
+      <div class={box({ content: 'base', border: props.border })}>
+        {props.children}
+      </div>
+    </div>
+  )
+}

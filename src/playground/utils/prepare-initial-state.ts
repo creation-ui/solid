@@ -1,6 +1,6 @@
 import { PlaygroundControl } from '../types'
 
-const prepareInitialState = (controls: PlaygroundControl[]) =>
+export const prepareInitialState = (controls: PlaygroundControl[]) =>
   controls?.reduce(
     (acc: any, { type, name, defaultValue, values, controls: c }) => {
       if (c) {

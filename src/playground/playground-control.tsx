@@ -1,12 +1,14 @@
-import {
-  Input,
-  Switch,
-  ToggleGroup,
-} from '@creation-ui/solid'
 import { capitalize } from '@creation-ui/core'
+import { Input, ToggleGroup, Switch } from '@creation-ui/solid'
 import clsx from 'clsx'
 import get from 'lodash.get'
-import { Component, For } from 'solid-js'
+import {
+  Component,
+  For,
+  Match,
+  Switch as SolidSwitch,
+  splitProps,
+} from 'solid-js'
 import { classes } from './classes'
 import { ColorsSelector } from './components/colors-selector'
 import { DEFAULT_CONTROLS } from './constants'
@@ -18,44 +20,46 @@ interface PlaygroundControlProps {
   parentKey?: string
 }
 
+const getName = (name: string, parentKey?: string) =>
+  parentKey ? `${parentKey}.${name}` : name
+
+const getLabel = (name: string, label?: string) => label ?? capitalize(name)
+
+const getCtrlType = (property: PlaygroundControl) =>
+  property.component ?? DEFAULT_CONTROLS[property.type]
+
 export const PlaygroundControlComponent: Component<
   PlaygroundControlProps
 > = props => {
   const [{ state }, { handleChange }] = usePlayground()
+  const [{ property, parentKey }] = splitProps(props, ['property', 'parentKey'])
 
-  const name = props.parentKey
-    ? `${props.parentKey}.${props.property.name}`
-    : props.property.name
+  const name = getName(property.name, parentKey)
+  const label = getLabel(property.name, property.label)
+  const controlType = getCtrlType(property)
 
-  const label = props.property.label ?? capitalize(name)
-
-  const controlType =
-    props.property.component ?? DEFAULT_CONTROLS[props.property.type]
-
-  const handleInputChange = (e: any) => {
-    handleChange(name, e.target.value)
-  }
-  const handlePlainChange = (value: any) => {
-    handleChange(name, value)
-  }
   const onClear = () => handleChange(name, '')
+  const handleInputChange = (e: any) => handleChange(name, e.target.value)
+  const handlePlainChange = (value: any) => handleChange(name, value)
 
   const value = get(state, name)
   const arrayValue = props.property.values?.find(v => v.value === value)
 
-  switch (controlType) {
-    case 'input:number':
-      return (
+  const isType = (type: string) => type === controlType
+
+  return (
+    <SolidSwitch fallback={`Control type ${controlType} not supported yet`}>
+      <Match when={isType('input:number')}>
         <Input
           value={value as number}
           onChange={handleInputChange}
           label={label}
           type={'number'}
           helperText={props.property.helperText}
+          onClear={onClear}
         />
-      )
-    case 'colors':
-      return (
+      </Match>
+      <Match when={isType('colors')}>
         <ColorsSelector
           label={label}
           value={arrayValue}
@@ -63,19 +67,16 @@ export const PlaygroundControlComponent: Component<
           onClick={handlePlainChange}
           helperText={props.property.helperText}
         />
-      )
-    case 'switch':
-      console.log('switch', value)
-      return (
+      </Match>
+      <Match when={isType('switch')}>
         <Switch
           label={label}
           checked={value as boolean}
           onChange={handlePlainChange}
           helperText={props.property.helperText}
         />
-      )
-    case 'toggle-group':
-      return (
+      </Match>
+      <Match when={isType('toggle-group')}>
         <ToggleGroup
           label={label}
           options={(props.property.values ?? []) as any}
@@ -83,9 +84,8 @@ export const PlaygroundControlComponent: Component<
           onChange={handlePlainChange}
           helperText={props.property.helperText}
         />
-      )
-    case 'nested':
-      return (
+      </Match>
+      <Match when={isType('nested')}>
         <div class={clsx(classes.controls, '!pl-0', '!pt-0', '!border-none')}>
           <div class='font-semibold'>{label}</div>
           <For each={props.property.controls}>
@@ -98,10 +98,8 @@ export const PlaygroundControlComponent: Component<
             )}
           </For>
         </div>
-      )
-    case 'input:text':
-      // default:
-      return (
+      </Match>
+      <Match when={isType('input:text')}>
         <Input
           onChange={handleInputChange}
           label={label}
@@ -111,8 +109,7 @@ export const PlaygroundControlComponent: Component<
           clearable={!!value}
           helperText={props.property.helperText}
         />
-      )
-    default:
-      return `Control type ${controlType} not supported yet`
-  }
+      </Match>
+    </SolidSwitch>
+  )
 }

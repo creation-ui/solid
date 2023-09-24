@@ -22,7 +22,7 @@ const classes = [
   'w-auto',
 ]
 
-const Icon = ({ icon, className, ...props }: IconProps) => {
+const Icon = (props: IconProps) => {
   const map: Record<InternalIconType, any> = {
     chevron_right: ChevronRight,
     chevron_left: ChevronLeft,
@@ -36,8 +36,8 @@ const Icon = ({ icon, className, ...props }: IconProps) => {
     home: Home,
   }
 
-  const Component = map[icon]
-  const c = twMerge(classes, className)
+  const Component = map[props.icon]
+  const c = twMerge(classes, props.className)
 
   return <Component class={c} {...props} />
 }

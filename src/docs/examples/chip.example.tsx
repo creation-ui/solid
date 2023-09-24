@@ -6,9 +6,9 @@ import {
 } from '@creation-ui/core'
 import { For } from 'solid-js'
 import clsx from 'clsx'
-const ExamplesColumn = ({ children, class: className }: any) => (
-  <div class={clsx(className, 'flex gap-3 flex-col items-center')}>
-    {children}
+const ExamplesColumn = (props: any) => (
+  <div class={clsx(props.class, 'flex gap-3 flex-col items-center')}>
+    {props.children}
   </div>
 )
 

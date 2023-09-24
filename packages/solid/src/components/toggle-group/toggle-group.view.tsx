@@ -2,15 +2,11 @@ import { getElementPosition } from '@creation-ui/core'
 import { Component, Index, splitProps } from 'solid-js'
 import { useInputBase } from '../input-base/input-base.context'
 import { toggleGroup } from './classes'
-import type { ToggleGroupOption, ToggleGroupProps } from './toggle-group.types'
+import type { ToggleGroupProps } from './toggle-group.types'
 
 export const ToggleGroupView: Component<ToggleGroupProps> = props => {
   const { componentId, readOnly, disabled } = useInputBase()
-  const [{ size, class: cs, options }, rest] = splitProps(props, [
-    'size',
-    'class',
-    'options',
-  ])
+  const [{ size, class: cs }, rest] = splitProps(props, ['size', 'class'])
 
   const isChecked = (value: any) => props.value === value
 
@@ -23,19 +19,19 @@ export const ToggleGroupView: Component<ToggleGroupProps> = props => {
         class: cs,
       })}
     >
-      <Index each={options}>
-        {({ label, value, disabled }: ToggleGroupOption, idx) => (
+      <Index each={props.options}>
+        {(option, idx) => (
           <div
-            data-key={value}
-            title={value}
+            data-key={option().value}
+            title={option().value}
             class={toggleGroup.button({
-              checked: isChecked(value),
+              checked: isChecked(option().value),
               disabled,
               size,
-              element: getElementPosition(options, idx),
+              element: getElementPosition(props.options, idx),
             })}
           >
-            <span>{label}</span>
+            <span>{option().label}</span>
           </div>
         )}
       </Index>

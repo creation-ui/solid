@@ -1,12 +1,13 @@
+import { JSXNode } from '@creation-ui/core'
 import clsx from 'clsx'
-import type { FC } from 'react'
+import { Component } from 'solid-js'
 
 interface PlaceholderProps {
-  children: JSX.Element
+  children: JSXNode
 }
 
 const classes = clsx(['text-info-400', 'cursor-default'])
 
-export const Placeholder: FC<PlaceholderProps> = ({ children }) => (
-  <span class={classes}>{children}</span>
+export const Placeholder: Component<PlaceholderProps> = props => (
+  <span class={classes}>{props.children}</span>
 )

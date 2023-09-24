@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { JSXElement, ParentComponent } from 'solid-js'
+import { JSXElement, ParentComponent, mergeProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { classes } from './classes'
 import { usePlayground } from './context/context'
@@ -12,9 +12,11 @@ export const PlaygroundComponent: ParentComponent<
   PlaygroundComponentProps
 > = () => {
   const [{ component, componentProps, state }] = usePlayground()
+  const merged = mergeProps({ component }, componentProps, state)
+
   return (
     <div class={clsx(classes.view)}>
-      <Dynamic component={component} {...componentProps} {...state} />
+      <Dynamic {...merged} />
     </div>
   )
 }

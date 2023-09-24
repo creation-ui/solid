@@ -7,7 +7,7 @@ import { inputContainer, label as labelClasses, text } from '@creation-ui/core'
 import { useId, useTheme } from '@creation-ui/solid'
 import clsx from 'clsx'
 import { capitalize } from '../../utils/capitalize'
-import { splitProps } from 'solid-js'
+import { Component, For, splitProps } from 'solid-js'
 
 export type ColorDefinition = {
   label: ElementStatus
@@ -23,13 +23,7 @@ interface ColorsSelectorProps extends BaseComponentProps {
   size?: ElementSize
 }
 
-export const ColorsSelector = ({
-  options,
-  onClick,
-  label,
-  value,
-  ...props
-}: ColorsSelectorProps) => {
+export const ColorsSelector: Component<ColorsSelectorProps> = props => {
   const componentId = useId()
 
   const { size: defaultSize } = useTheme()
@@ -45,28 +39,30 @@ export const ColorsSelector = ({
       <label
         for={componentId}
         class={labelClasses({ size, required: props.required })}
-        aria-label={label?.toString()}
+        aria-label={props.label?.toString()}
       >
-        {label}
+        {props.label}
       </label>
       <div class='flex gap-3 w-fit' aria-required={props.required}>
-        {options.map(o => (
-          <div
-            data-key={o.value}
-            title={capitalize(o.label)}
-            onClick={onClick.bind(null, o.value)}
-            class={clsx([
-              'transform',
-              'transition-transform',
-              o.class,
-              'h-6',
-              'w-6',
-              'rounded',
-              'cursor-pointer',
-              value === o.value && 'scale-125',
-            ])}
-          />
-        ))}
+        <For each={props.options}>
+          {o => (
+            <div
+              data-key={o.value}
+              title={capitalize(o.label)}
+              onClick={props.onClick.bind(null, o.value)}
+              class={clsx([
+                'transform',
+                'transition-transform',
+                o.class,
+                'h-6',
+                'w-6',
+                'rounded',
+                'cursor-pointer',
+                props.value === o.value && 'scale-125',
+              ])}
+            />
+          )}
+        </For>
       </div>
     </div>
   )

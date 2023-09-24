@@ -8,6 +8,7 @@ export const InputView: Component<InputViewProps> = props => {
 
   return (
     <input
+      {...props}
       id={componentId}
       class={classes.input}
       type={type}
@@ -15,7 +16,6 @@ export const InputView: Component<InputViewProps> = props => {
       aria-invalid={!!error}
       aria-readonly={!!readOnly}
       readOnly={readOnly}
-      {...props}
     />
   )
 }

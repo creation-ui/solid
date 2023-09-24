@@ -5,10 +5,10 @@ import {
   mdiBorderLeftVariant,
   mdiBorderRightVariant,
   mdiBorderTopVariant,
-  mdiSetLeft,
-  mdiSetLeftRight,
-  mdiSetNone,
-  mdiSetRight,
+  // mdiSetLeft,
+  // mdiSetLeftRight,
+  // mdiSetNone,
+  // mdiSetRight,
   mdiSizeL,
   mdiSizeM,
   mdiSizeS,
@@ -16,7 +16,7 @@ import {
   mdiSquareRoundedOutline,
 } from '@mdi/js'
 import { ColorDefinition } from './components/colors-selector'
-import { INPUT_TYPES } from './constants'
+// import { INPUT_TYPES } from './constants'
 import { PlaygroundControl } from './types'
 
 const SIZES = [
@@ -52,12 +52,12 @@ const COLORS: ColorDefinition[] = [
   { value: 'info', label: 'info', class: 'bg-info-500' },
 ]
 
-const ICON = [
-  { value: 'left', label: <Icon path={mdiSetLeft} size={1} /> },
-  { value: 'right', label: <Icon path={mdiSetRight} size={1} /> },
-  { value: 'both', label: <Icon path={mdiSetLeftRight} size={1} /> },
-  { value: 'none', label: <Icon path={mdiSetNone} size={1} /> },
-]
+// const ICON = [
+//   { value: 'left', label: <Icon path={mdiSetLeft} size={1} /> },
+//   { value: 'right', label: <Icon path={mdiSetRight} size={1} /> },
+//   { value: 'both', label: <Icon path={mdiSetLeftRight} size={1} /> },
+//   { value: 'none', label: <Icon path={mdiSetNone} size={1} /> },
+// ]
 const POSITION = [
   { value: 'top', label: <Icon path={mdiBorderTopVariant} size={1} /> },
   { value: 'left', label: <Icon path={mdiBorderLeftVariant} size={1} /> },
@@ -74,7 +74,7 @@ const POSITION_VERTICAL = [
   { value: 'top', label: <Icon path={mdiBorderTopVariant} size={1} /> },
 ]
 
-const INPUT_TYPES_DROPDOWN = INPUT_TYPES
+// const INPUT_TYPES_DROPDOWN = INPUT_TYPES
 
 export const childrenControl: PlaygroundControl = {
   name: 'children',

@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext } from 'solid-js'
 import {
   AutocompleteOptionProps,
   AutocompleteOptionDefault,
@@ -33,7 +33,7 @@ interface AutocompleteContextValue<T = any>
   propsList: Record<string, unknown>
   getOptionProps: (
     option: AutocompleteOptionDefault,
-    index: number,
+    index: number
   ) => AutocompleteOptionProps
   /** CONTROLS **/
   setOpen: (value: boolean) => void
@@ -45,7 +45,7 @@ export const useAutocomplete = () => {
   const context = useContext<AutocompleteContextValue>(AutocompleteContext)
   if (!context) {
     throw new Error(
-      'useAutocomplete must be used within an AutocompleteProvider',
+      'useAutocomplete must be used within an AutocompleteProvider'
     )
   }
   return context

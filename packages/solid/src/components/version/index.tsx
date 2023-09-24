@@ -9,11 +9,8 @@ interface VersionProps {
 
 const zeroPad = (n: number) => n.toString().padStart(2, '0')
 
-export const Version: Component<VersionProps> = ({
-  classNameOverride,
-  gitHash,
-}) => {
-  const { shortHash, hash, version, timestamp } = gitHash
+export const Version: Component<VersionProps> = (props) => {
+  const { shortHash, hash, version, timestamp } = props.gitHash
   const date = new Date(timestamp)
 
   const [month, day, year] = [
@@ -51,8 +48,8 @@ export const Version: Component<VersionProps> = ({
     <div
       class={clsx(
         'text-[8px]',
-        classNameOverride
-          ? classNameOverride
+        props.classNameOverride
+          ? props.classNameOverride
           : 'absolute bottom-0 right-0 px-2',
       )}
     >
@@ -80,14 +77,14 @@ interface VersionBodyProps {
   branch: string
 }
 
-const VersionBody = ({ date, version, hash, branch }: VersionBodyProps) => (
+const VersionBody = (props: VersionBodyProps) => (
   <div>
-    <div>Version: {version}</div>
+    <div>Version: {props.version}</div>
     <dl>
       <dt>Build details</dt>
-      <dd>Build: {date}</dd>
-      <dd>Branch: {branch}</dd>
-      <dd>Commit Hash: {hash}</dd>
+      <dd>Build: {props.date}</dd>
+      <dd>Branch: {props.branch}</dd>
+      <dd>Commit Hash: {props.hash}</dd>
     </dl>
   </div>
 )

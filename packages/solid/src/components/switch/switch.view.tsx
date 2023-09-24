@@ -5,10 +5,9 @@ import type { SwitchProps } from './switch.types'
 
 export const SwitchView: Component<SwitchProps> = props => {
   const { componentId, readOnly, disabled, classes } = useInputBase()
-  const [{ onChange, required, size }] = splitProps(props, [
+  const [{ onChange, required, size }, rest] = splitProps(props, [
     'size',
     'required',
-
     'onChange',
   ])
 
@@ -28,7 +27,7 @@ export const SwitchView: Component<SwitchProps> = props => {
           aria-required={required}
           class={'hidden'}
           disabled={disabled}
-          {...props}
+          {...rest}
         />
         <span
           aria-hidden='true'
